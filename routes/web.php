@@ -45,9 +45,9 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::view('/teacher', 'teacher.dashboard')->name('teacher.dashboard');
 });
 
-Route::middleware(['auth', 'role:exam-committee'])->group(function () {
+Route::middleware(['auth', 'role:evaluator'])->group(function () {
 
-    Route::view('/exam-committee', 'exam-committee.dashboard')->name('examcommittee.dashboard');
+    Route::view('/evaluator', 'evaluator.dashboard')->name('evaluator.dashboard');
 });
 
 

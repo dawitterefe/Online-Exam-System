@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate(2);
+        $users = User::latest()->paginate(4);
         return view('admin.all-users', compact('users'));
     }
 
@@ -22,7 +23,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('admin.create-user',compact('roles'));
     }
 
     /**
@@ -30,7 +32,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'gender' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'roles' => ['required', 'integer'],
+        ]);
+
+        $user = User::create([
+            'name' => $request->first_name,
+            'avatar' => 'storage/avatar/avatar.png',
+            'father_name' => $request->last_name,
+            'gender' => $request->input('gender'),
+            'email' => $request->email,
+            'password' => bcrypt('password'),
+            'role_id' => $request->roles,
+        ]);
+
+        return redirect()->route('user.index');
+        // return $user->role->name;
     }
 
     /**
@@ -47,7 +68,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $users = User::latest()->paginate(2);
+        return view('admin.edit-user', compact('users'));
     }
 
     /**

@@ -11,12 +11,14 @@
         "codeat3/blade-codicons": "^1.31",
         "codeat3/blade-file-icons": "^1.8",
         "codeat3/blade-google-material-design-icons": "^1.18",
+        "codeat3/blade-typicons": "^1.5",
         "davidhsianturi/blade-bootstrap-icons": "^1.4",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "owenvoke/blade-fontawesome": "^2.2"
+        "owenvoke/blade-fontawesome": "^2.2",
+        "saade/blade-iconsax": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
