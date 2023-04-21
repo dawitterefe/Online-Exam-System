@@ -12,7 +12,7 @@
                 </h2>
             </div>
 
-            <a href="#"
+            <a href="{{ URL::previous() }}"
                 class="middle none center rounded-lg bg-cyan-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
         </div>
@@ -26,14 +26,13 @@
     <div class="max-w-xl mt-0 mx-auto">
         <div class="flex flex-col">
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
-                <div class="inline-block min-w-full align-middle">
+                <div class="inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800">
 
-                    <div class=" mx-3 my-3 ">
-
+                    <div class=" mx-9 my-7 ">
                         <!-- Validation Errors -->
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                        <form method="POST" action="{{ route('user.store') }}">
+                        <form method="POST" action="{{ route('users.store') }}">
                             @csrf
 
                             <div class="grid gap-5">
@@ -71,50 +70,25 @@
                                 </div>
 
                                 {{-- gender --}}
-                                <div class="grid gap-0">
-                                    <div class="flex ">
-
-                                        {{-- male --}}
-                                        <div class="inline-flex items-center">
-                                            <label class="relative flex cursor-pointer items-center rounded-full p-3"
-                                                for="react" data-ripple-dark="true">
-                                                <input value="M" name="gender" type="radio"
-                                                    class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-cyan-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-cyan-500 checked:before:bg-cyan-500 hover:before:opacity-10" />
-                                                <div
-                                                    class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-cyan-500 opacity-0 transition-opacity peer-checked:opacity-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5"
-                                                        viewBox="0 0 16 16" fill="currentColor">
-                                                        <circle data-name="ellipse" cx="8" cy="8"
-                                                            r="8"></circle>
-                                                    </svg>
-                                                </div>
-                                            </label>
-                                            <label {{-- class="mt-px cursor-pointer select-none font-light text-gray-700" --}} for="react">
-                                                Male
+                                <div class="grid gap-3">
+                                    <div class="flex">
+                                        <div class="flex items-center mr-4">
+                                            <input id="gender" type="radio" value="M"
+                                                name="gender"
+                                                class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for=""
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male
                                             </label>
                                         </div>
 
-                                        {{-- female --}}
-                                        <div class="inline-flex items-center">
-                                            <label class="relative flex cursor-pointer items-center rounded-full p-3"
-                                                for="react" data-ripple-dark="true">
-                                                <input value="F" name="gender" type="radio"
-                                                    class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-cyan-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-cyan-500 checked:before:bg-cyan-500 hover:before:opacity-10" />
-                                                <div
-                                                    class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-cyan-500 opacity-0 transition-opacity peer-checked:opacity-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5"
-                                                        viewBox="0 0 16 16" fill="currentColor">
-                                                        <circle data-name="ellipse" cx="8" cy="8"
-                                                            r="8"></circle>
-                                                    </svg>
-                                                </div>
-                                            </label>
-                                            <label class="mt-px cursor-pointer select-none" for="react">
-                                                Female
+                                        <div class="flex items-center mr-4">
+                                            <input id="gender" type="radio" value="F"
+                                                name="gender"
+                                                class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for=""
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female
                                             </label>
                                         </div>
-
-
                                     </div>
 
                                     <div class="grid gap-5">
@@ -139,7 +113,8 @@
 
                                             <x-form.label for="roles" :value="__('Role')" />
 
-                                            <select id="roles" name="roles" class="py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1">
+                                            <select id="roles" name="roles"
+                                                class="py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1">
 
                                                 <option selected><i class="fa fa-trash-alt"></i>Select a role</option>
 
@@ -147,7 +122,6 @@
                                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                                 @endforeach
                                             </select>
-
                                         </div>
 
 

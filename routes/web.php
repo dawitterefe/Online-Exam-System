@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
-    Route::resource('/user', UserController::class);
+    Route::resource('/users', UserController::class);
 });
 
 Route::middleware(['auth', 'role:student'])->group(function () {

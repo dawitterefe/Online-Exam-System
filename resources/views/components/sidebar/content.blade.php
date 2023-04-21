@@ -21,10 +21,11 @@
                 <x-fas-user-cog class="w-6 h-6" />
             </x-slot>
 
-            <x-sidebar.sublink title="All Users" href="{{ route('user.index') }}" :active="request()->routeIs('user.index')" />
+            <x-sidebar.sublink title="All Users" href="{{ route('users.index') }}" :active="request()->routeIs('users.index')" />
             <x-sidebar.sublink title="Students" href="{{ route('buttons.text') }}" :active="request()->routeIs('buttons.text')" />
+            <x-sidebar.sublink title="Evaluators" href="{{ route('buttons.text-icon') }}" :active="request()->routeIs('buttons.text-icon')" />
             <x-sidebar.sublink title="Teachers" href="{{ route('buttons.icon') }}" :active="request()->routeIs('buttons.icon')" />
-            <x-sidebar.sublink title="Exam-Committe" href="{{ route('buttons.text-icon') }}" :active="request()->routeIs('buttons.text-icon')" />
+
         </x-sidebar.dropdown>
     @endif
 
