@@ -68,10 +68,4 @@
         @csrf
     </form> --}}
 
-
-
-
-
-
-
 </section>

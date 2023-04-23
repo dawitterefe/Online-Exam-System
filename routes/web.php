@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -33,6 +34,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
     Route::resource('/users', UserController::class);
+    Route::resource('/courses', CourseController::class);
+
 });
 
 Route::middleware(['auth', 'role:student'])->group(function () {

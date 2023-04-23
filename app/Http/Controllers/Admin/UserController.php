@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use sirajcse\UniqueIdGenerator\UniqueIdGenerator;
 
 class UserController extends Controller
 {
@@ -16,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest()->paginate(4);
-        return view('admin.all-users', compact('users'));
+        return view('admin.users', compact('users'));
     }
 
     /**
@@ -50,6 +52,21 @@ class UserController extends Controller
             'password' => bcrypt('password'),
             'role_id' => $request->roles,
         ]);
+
+
+        if ($user->role->name == 'Student') {
+
+            $id = UniqueIdGenerator::generate([
+                'table' => 'students', 'length' => 14, 'prefix' => 'DBUS/', 'suffix' => date('/Y')
+            ]);
+
+            $student = Student::create([
+                'id' => $id,
+                'user_id' => $user->id,
+            ]);
+        }
+
+
 
         return redirect()->route('users.index');
         // return $user->role->name;
@@ -115,7 +132,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return Redirect::route('users.edit',$user->id)->with('status', 'profile-updated');
+        return Redirect::route('users.edit', $user->id)->with('status', 'profile-updated');
         // return $user;
     }
 

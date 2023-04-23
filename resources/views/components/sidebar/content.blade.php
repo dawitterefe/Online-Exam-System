@@ -9,24 +9,24 @@
             </x-slot>
         </x-sidebar.link>
 
-        {{-- User Administration --}}
-
-        <x-sidebar.dropdown title="User Control" :active="Str::startsWith(
-            request()
-                ->route()
-                ->uri(),
-            'user',
-        )">
+        {{-- User Control --}}
+        <x-sidebar.link title="User Control" href="{{ route('users.index') }}" :isActive="in_array(request()->route()->getName(), ['users.index', 'users.edit', 'users.show','users.create' ,'users.delete'])">
             <x-slot name="icon">
                 <x-fas-user-cog class="w-6 h-6" />
             </x-slot>
+        </x-sidebar.link>
 
-            <x-sidebar.sublink title="All Users" href="{{ route('users.index') }}" :active="request()->routeIs('users.index')" />
-            <x-sidebar.sublink title="Students" href="{{ route('buttons.text') }}" :active="request()->routeIs('buttons.text')" />
-            <x-sidebar.sublink title="Evaluators" href="{{ route('buttons.text-icon') }}" :active="request()->routeIs('buttons.text-icon')" />
-            <x-sidebar.sublink title="Teachers" href="{{ route('buttons.icon') }}" :active="request()->routeIs('buttons.icon')" />
+        {{-- User Control --}}
+        <x-sidebar.link title="Course Hub" href="{{ route('courses.index') }}" :isActive="in_array(request()->route()->getName(), ['courses.index', 'courses.edit', 'courses.show','courses.create' ,'courses.delete'])">
+            <x-slot name="icon">
+                <x-iconpark-bookshelf class="w-5 h-5"/>
+            </x-slot>
+        </x-sidebar.link>
 
-        </x-sidebar.dropdown>
+
+
+
+
     @endif
 
 
