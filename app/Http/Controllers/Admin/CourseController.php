@@ -80,12 +80,12 @@ class CourseController extends Controller
             'credit_hour' => ['required', 'integer'],
         ]);
 
-        
+
             $course->course_code = $request->code;
             $course->course_title = $request->title;
             $course->credit_hour = $request->credit_hour;
             $course->save();
-      
+
 
         return Redirect::route('courses.edit', $course->id)->with('status', 'profile-updated');
         // return $course;
@@ -96,6 +96,32 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $course = Course::findOrFail($id);
+        $course->delete();
+        return redirect()->route('courses.index');
+    }
+
+    public function Trashed()
+    {
+        $courses = Course::onlyTrashed()->paginate(4);
+
+        return view('admin.trashed-course', compact('courses'));
+    }
+
+    public function restore($id)
+    {
+
+        $course = Course::onlyTrashed()->findOrFail($id);
+        $course->restore();
+
+        return redirect()->route('courses.index');
+    }
+    public function forceDelete($id)
+    {
+        $course = Course::onlyTrashed()->findOrFail($id);
+
+        $course->forceDelete();
+
+        return redirect()->route('courses.index');
     }
 }

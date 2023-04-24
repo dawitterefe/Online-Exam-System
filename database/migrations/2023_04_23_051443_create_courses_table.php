@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('course_title');
             $table->integer('credit_hour');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

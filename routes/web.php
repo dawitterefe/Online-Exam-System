@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserCourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -33,8 +34,24 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
+    Route::get('/users/trash',[UserController::class, 'trashed'])->name('users.trashed');
+    Route::get('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    Route::delete('/users/{id}/force-delete', [UserController::class, 'forceDelete'])->name('users.force_delete');
     Route::resource('/users', UserController::class);
+
+    Route::get('/courses/trash',[CourseController::class, 'trashed'])->name('courses.trashed');
+    Route::get('/courses/{id}/restore', [CourseController::class, 'restore'])->name('courses.restore');
+    Route::delete('/courses/{id}/force-delete', [CourseController::class, 'forceDelete'])->name('courses.force_delete');
     Route::resource('/courses', CourseController::class);
+
+    Route::get('/students',[UserCourseController::class,'showStudent'])->name('admin.students');
+    Route::get('/students/{id}/assign-course',[UserCourseController::class,'showAssignCourse'])->name('admin.show_assign_course');
+    Route::get('/students/{id}/add-course',[UserCourseController::class,'assignCourse'])->name('admin.assign_course');
+    Route::get('/students/{student_id}/{course_id}/detach-course',[UserCourseController::class,'detachCourse'])->name('admin.detach_course');
+
+
+
+
 
 });
 

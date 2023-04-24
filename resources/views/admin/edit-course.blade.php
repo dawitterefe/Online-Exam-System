@@ -27,11 +27,11 @@
                         <!-- Validation Errors -->
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                        <form method="POST" action="{{ route('courses.store') }}">
+                        <form method="POST" action="{{ route('courses.update', $course->id) }}">
                             @csrf
-
-                             {{-- change course code --}}
-                             <div class="space-y-2">
+                            @method('PUT')
+                            {{-- change course code --}}
+                            <div class="space-y-2">
                                 <x-form.label for="code" :value="__('Course Code')" />
 
                                 <x-form.input id="code" name="code" type="text" class="block w-full"
@@ -50,8 +50,8 @@
                                 <x-form.error :messages="$errors->get('title')" />
                             </div>
 
-                           
-                            
+
+
                             {{-- change credit Hour --}}
                             <div class="space-y-2">
                                 <x-form.label for="credit_hour" :value="__('Credit Hour')" />
@@ -61,19 +61,24 @@
 
                                 <x-form.error :messages="$errors->get('credit_hour')" />
                             </div>
-
                             {{-- save --}}
-                            <div class="flex justify-end">
-                                <x-button>
-                                    {{ __('Update') }}
-                                </x-button>
-
-                                @if (session('status') === 'profile-updated')
-                                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                                        class="text-sm text-gray-600 dark:text-gray-400">
-                                        {{ __('Saved.') }}
-                                    </p>
-                                @endif
+                            <div class="mt-5 flex justify-end">
+                                <div class="flex items-center gap-2">
+                                    <div>
+                                        <x-button>
+                                            {{ __('Update') }}
+                                        </x-button>
+                                    </div>
+                                    <div>
+                                        @if (session('status') === 'profile-updated')
+                                            <p x-data="{ show: true }" x-show="show" x-transition
+                                                x-init="setTimeout(() => show = false, 2000)"
+                                                class="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                                {{ __('Updated.') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
 
                         </form>

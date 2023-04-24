@@ -27,8 +27,8 @@
 
                         <div class="mx-3 my-7 justify-center text-center">
                             <div class="mx-4">
-                                <img src="{{ asset($user->avatar) }}" class="w-32 my-3 mx-auto rounded-full"
-                                    alt="Avatar" />
+                                <img src="{{ asset($user->avatar) }}" class="w-32 h-32 my-3 mx-auto rounded-full" alt="Avatar" />
+
                                 <h2 class=" font-bold text-2xl tracking-wide">{{ $user->name }}
                                     {{ $user->father_name }}</h2>
                                 <h1 class="text-base tracking-wide">{{ $user->email }}</h1>
@@ -43,7 +43,7 @@
                             </div>
 
                             <div class="mx-15 my-4">
-                                <a href="{{route('users.edit', $user->id)}}"
+                                <a href="{{ route('users.edit', $user->id) }}"
                                     class="middle none center rounded-lg bg-blue-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg-underline hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                     <i class="fa fa-edit"></i> Edit</a>
 

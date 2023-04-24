@@ -17,12 +17,13 @@ return new class extends Migration
             $table->string('father_name');
             $table->string('gender');
             $table->string('email')->unique();
-            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
+            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade')->onUpdate('cascade');
             $table->text('avatar');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
 
         });
     }

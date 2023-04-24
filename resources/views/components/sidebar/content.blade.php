@@ -10,23 +10,40 @@
         </x-sidebar.link>
 
         {{-- User Control --}}
-        <x-sidebar.link title="User Control" href="{{ route('users.index') }}" :isActive="in_array(request()->route()->getName(), ['users.index', 'users.edit', 'users.show','users.create' ,'users.delete'])">
+        <x-sidebar.link title="User Control" href="{{ route('users.index') }}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['users.index', 'users.edit', 'users.show', 'users.create', 'users.delete', 'users.trashed'],
+        )">
             <x-slot name="icon">
                 <x-fas-user-cog class="w-6 h-6" />
             </x-slot>
         </x-sidebar.link>
 
-        {{-- User Control --}}
-        <x-sidebar.link title="Course Hub" href="{{ route('courses.index') }}" :isActive="in_array(request()->route()->getName(), ['courses.index', 'courses.edit', 'courses.show','courses.create' ,'courses.delete'])">
+        {{-- Courses Control --}}
+        <x-sidebar.link title="Course Hub" href="{{ route('courses.index') }}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['courses.index', 'courses.edit', 'courses.show', 'courses.create', 'courses.delete', 'courses.trashed'],
+        )">
             <x-slot name="icon">
-                <x-iconpark-bookshelf class="w-5 h-5"/>
+                <x-iconpark-bookshelf class="w-5 h-5" />
             </x-slot>
         </x-sidebar.link>
 
-
-
-
-
+        {{-- Students Control --}}
+        <x-sidebar.link title="Students" href="{{ route('admin.students') }}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['admin.students','admin.show_assign_course'],
+        )">
+            <x-slot name="icon">
+                <x-fas-user-graduate class="w-5 h-5" />
+            </x-slot>
+        </x-sidebar.link>
     @endif
 
 

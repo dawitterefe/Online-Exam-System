@@ -1,7 +1,7 @@
 <nav
     aria-label="secondary"
     x-data="{ open: false }"
-    class="sticky top-0 z-10 flex items-center justify-between px-4 py-2 sm:px-6 transition-transform duration-500 bg-white dark:bg-dark-eval-1"
+    class="sticky top-0 z-10 flex items-center justify-between px-4 py-0 sm:px-6 transition-transform duration-500 bg-white dark:bg-dark-eval-1"
     :class="{
         '-translate-y-full': scrollingDown,
         'translate-y-0': scrollingUp,
@@ -58,7 +58,7 @@
                     class="flex items-center p-2 text-sm font-medium text-gray-500 rounded-md transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200"
                 >
                 <div class="inline-flex items-center gap-2">
-                    <div> <img src="{{asset(Auth::user()->avatar)}}" class="w-8 rounded-full" alt="Avatar" /> </div>
+                    <div> <img src="{{asset(Auth::user()->avatar)}}" class="w-8 h-8 my-3 mx-auto rounded-full" alt="Avatar"  /> </div>
                     <div>{{ Auth::user()->name }} {{Auth::user()->father_name}}</div>
                 </div>
 

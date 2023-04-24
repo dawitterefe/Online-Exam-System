@@ -19,17 +19,17 @@
     </x-slot>
 
     <!-- component -->
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-5xl mx-auto">
         <div class="flex flex-col">
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800">
                     <div class="overflow-hidden">
                         <section>
-                            <div class="flex justify-start">
+                            <div class="flex justify-center">
                                 <div class="inline-flex items-center">
-                                    <div class="ml-10 mr-3">
-                                        <img src="{{ asset($user->avatar) }}" class="w-32 rounded-full"
-                                            alt="Avatar" />
+                                    <div class="mr-3">
+                                        <img src="{{ asset($user->avatar) }}"
+                                            class="w-32 h-32 my-3 mx-auto rounded-full" alt="Avatar" />
                                     </div>
 
                                     <div class="mx-3">
@@ -132,29 +132,31 @@
 
                                                     @foreach ($roles as $role)
                                                         <option {{ $role->id == $user->role_id ? 'selected' : '' }}
-                                                            value="{{ $role->id }}">{{ $role->name }}</option>
+                                                            value="{{ $role->id }}">{{ $role->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
 
                                             {{-- save --}}
-                                            <div class="flex justify-end">
-                                                <x-button>
-                                                    {{ __('Update') }}
-                                                </x-button>
-
-                                                @if (session('status') === 'profile-updated')
-                                                    <p x-data="{ show: true }" x-show="show" x-transition
-                                                        x-init="setTimeout(() => show = false, 2000)"
-                                                        class="text-sm text-gray-600 dark:text-gray-400">
-                                                        {{ __('Saved.') }}
-                                                    </p>
-                                                @endif
+                                            <div class="mt-5 mb-10 flex justify-end">
+                                                <div class="flex items-center gap-2">
+                                                    <div>
+                                                        <x-button>
+                                                            {{ __('Update') }}
+                                                        </x-button>
+                                                    </div>
+                                                    <div>
+                                                        @if (session('status') === 'profile-updated')
+                                                            <p x-data="{ show: true }" x-show="show" x-transition
+                                                                x-init="setTimeout(() => show = false, 2000)"
+                                                                class="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                                                {{ __('Updated.') }}
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                            {{-- <div class="form-group">
-                                                <button class="btn btn-primary mt-2"> Submit</button>
-                                            </div> --}}
                                         </form>
                                     </div>
                                 </div>

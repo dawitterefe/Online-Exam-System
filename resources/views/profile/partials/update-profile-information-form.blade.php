@@ -11,7 +11,8 @@
     <div class="mx-5 my-3 flex justify-start text-center">
         <div class="inline-flex items-center">
             <div >
-                <img src="{{ asset(Auth::user()->avatar) }}" class="w-28 rounded-full" alt="Avatar" />
+                <img src="{{ asset(Auth::user()->avatar) }}" class="w-28 h-28 my-3 mx-auto rounded-full" alt="Avatar" />
+
             </div>
 
             <div class="ml-4">
@@ -42,17 +43,23 @@
                         </div>
 
                         {{-- save --}}
-                        <div class="flex items-center gap-3">
-                            <x-button>
-                                {{ __('Update') }}
-                            </x-button>
-
-                            @if (session('status') === 'profile-updated')
-                                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                                    class="text-sm text-gray-600 dark:text-gray-400">
-                                    {{ __('Saved.') }}
-                                </p>
-                            @endif
+                        <div class="flex justify-end">
+                            <div class="flex items-center gap-2">
+                                <div>
+                                    <x-button>
+                                        {{ __('Update') }}
+                                    </x-button>
+                                </div>
+                                <div>
+                                    @if (session('status') === 'profile-updated')
+                                        <p x-data="{ show: true }" x-show="show" x-transition
+                                            x-init="setTimeout(() => show = false, 2000)"
+                                            class="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                            {{ __('Updated.') }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
                     </div>

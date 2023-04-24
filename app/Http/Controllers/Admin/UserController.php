@@ -57,7 +57,7 @@ class UserController extends Controller
         if ($user->role->name == 'Student') {
 
             $id = UniqueIdGenerator::generate([
-                'table' => 'students', 'length' => 14, 'prefix' => 'DBUS/', 'suffix' => date('/Y')
+                'table' => 'students', 'length' => 14, 'prefix' => 'dbus-', 'suffix' => date('-Y')
             ]);
 
             $student = Student::create([
@@ -141,6 +141,37 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('users.index');
+    }
+
+    public function Trashed()
+    {
+        $users = User::onlyTrashed()->paginate(4);
+
+        return view('admin.trashed-user', compact('users'));
+    }
+
+    public function restore($id)
+    {
+
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->restore();
+
+        return redirect()->route('users.index');
+    }
+    public function forceDelete($id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+
+        if ($user->avatar != "storage/avatar/avatar.png") {
+
+            unlink(public_path($user->avatar));
+        }
+
+        $user->forceDelete();
+
+        return redirect()->route('users.index');
     }
 }

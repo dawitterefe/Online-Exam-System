@@ -124,10 +124,6 @@
                                             </select>
                                         </div>
 
-
-
-
-
                                         <div class="flex justify-end w-13 h-9 ">
                                             <x-button class="justify-center w-half gap-2">
                                                 <x-heroicon-o-user-add class="w-6 h-6" aria-hidden="true" />
@@ -137,11 +133,6 @@
                                         </div>
                                     </div>
                         </form>
-
-
-
-
-
                     </div>
                 </div>
             </div>

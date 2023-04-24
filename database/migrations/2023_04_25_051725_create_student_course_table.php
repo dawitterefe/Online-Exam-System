@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('student_course', function (Blueprint $table) {
             $table->id();
             $table->string('student_id');
-            $table->foreign('student_id')->references('id')->on('students');
-            $table->foreignId('course_id')->constrained('courses');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            
+            // Add unique index on student_id and course_id columns
+            $table->unique(['student_id', 'course_id']);
         });
     }
 
