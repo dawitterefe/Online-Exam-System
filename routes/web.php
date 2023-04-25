@@ -44,10 +44,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/courses/{id}/force-delete', [CourseController::class, 'forceDelete'])->name('courses.force_delete');
     Route::resource('/courses', CourseController::class);
 
-    Route::get('/students',[UserCourseController::class,'showStudent'])->name('admin.students');
+    Route::get('/students',[UserCourseController::class,'showStudents'])->name('admin.students');
+   
     Route::get('/students/{id}/assign-course',[UserCourseController::class,'showAssignCourse'])->name('admin.show_assign_course');
     Route::get('/students/{id}/add-course',[UserCourseController::class,'assignCourse'])->name('admin.assign_course');
     Route::get('/students/{student_id}/{course_id}/detach-course',[UserCourseController::class,'detachCourse'])->name('admin.detach_course');
+    
+    Route::get('/teachers',[UserCourseController::class,'showTeachers'])->name('admin.teachers');
+
+    Route::get('/teachers/{id}/assign-course',[UserCourseController::class,'showAssignTeacherCourse'])->name('admin.show_assign_teacher_course');
+    Route::get('/teachers/{id}/add-course',[UserCourseController::class,'assignTeacherCourse'])->name('admin.assign_teacher_course');
+    Route::get('/teachers/{techer_id}/{course_id}/remove-course',[UserCourseController::class,'removeTeacherCourse'])->name('admin.remove_course');
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -66,7 +67,17 @@ class UserController extends Controller
             ]);
         }
 
+        if ($user->role->name == 'Teacher') {
 
+            $id = UniqueIdGenerator::generate([
+                'table' => 'teachers', 'length' => 14, 'prefix' => 'dbut-', 'suffix' => date('-Y')
+            ]);
+
+            $teacher = Teacher::create([
+                'id' => $id,
+                'user_id' => $user->id,
+            ]);
+        }
 
         return redirect()->route('users.index');
         // return $user->role->name;

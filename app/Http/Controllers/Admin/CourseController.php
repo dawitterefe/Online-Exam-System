@@ -33,13 +33,18 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => ['required', 'string', 'max:56'],
+            'course_code' => ['required', 'string', 'unique:courses','max:56'],
             'title' => ['required', 'string', 'max:100'],
             'credit_hour' => ['required', 'integer'],
-        ]);
+        ], ['course_code.unique' => 'This course code already exists.',]);
+
+
+        $request->validate([
+            'course_code' => 'required|unique:courses,course_code',], 
+            ['course_code.unique' => 'This course code already exists.',]);
 
         $course = Course::create([
-            'course_code' => $request->code,
+            'course_code' => $request->course_code,
             'course_title' => $request->title,
             'credit_hour' => $request->credit_hour,
         ]);

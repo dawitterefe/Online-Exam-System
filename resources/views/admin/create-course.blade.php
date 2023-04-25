@@ -36,19 +36,18 @@
                             <div class="grid gap-3">
                                 <!-- course code-->
                                 <div class="space-y-2">
-                                    <x-form.label for="code" :value="__('Course Code')" />
+                                    <x-form.label for="course_code" :value="__('Course Code')" />
 
                                     <x-form.input-with-icon-wrapper>
                                         <x-slot name="icon">
                                             <x-tabler-id-badge-2 class="w-5 h-5" />
                                         </x-slot>
 
-                                        <x-form.input withicon id="code" class="block w-full" type="text"
-                                            name="code" :value="old('code')" required autofocus
+                                        <x-form.input withicon id="course_code" class="block w-full" type="text"
+                                            name="course_code" :value="old('course_code')" required autofocus
                                             placeholder="{{ __('Course Code') }}" />
                                     </x-form.input-with-icon-wrapper>
                                 </div>
-
 
                                 <!-- course title-->
                                 <div class="space-y-2">

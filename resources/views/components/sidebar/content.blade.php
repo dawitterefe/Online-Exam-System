@@ -32,6 +32,13 @@
                 <x-iconpark-bookshelf class="w-5 h-5" />
             </x-slot>
         </x-sidebar.link>
+                   
+        {{-- <div class="mr-2 mb-3">
+
+                    <div class="border-b border-white-500 w-full "></div>
+
+                   </div> --}}
+
 
         {{-- Students Control --}}
         <x-sidebar.link title="Students" href="{{ route('admin.students') }}" :isActive="in_array(
@@ -44,6 +51,31 @@
                 <x-fas-user-graduate class="w-5 h-5" />
             </x-slot>
         </x-sidebar.link>
+
+        {{-- teachers Control --}}
+        <x-sidebar.link title="Teachers" href="{{ route('admin.teachers') }}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['admin.teachers','admin.show_assign_teacher_course'],
+        )">
+            <x-slot name="icon">
+                <x-fas-chalkboard-teacher class="w-5 h-6"/>
+            </x-slot>
+        </x-sidebar.link>
+        
+        {{-- Evalutors Control --}}
+        <x-sidebar.link title="Evaluators" href="{{ route('admin.teachers') }}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            [],
+        )">
+            <x-slot name="icon">
+               <x-fas-user-doctor class="w-5 h-5" />
+            </x-slot>
+        </x-sidebar.link>
+
     @endif
 
 

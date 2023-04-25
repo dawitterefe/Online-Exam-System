@@ -15,4 +15,9 @@ class Course extends Model
         'course_title',
         'credit_hour',
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
 }

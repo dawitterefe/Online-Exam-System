@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('course_code');
+            $table->string('course_code')->unique();
             $table->string('course_title');
             $table->integer('credit_hour');
+            $table->string('teacher_id')->nullable();;
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['teacher_id', 'course_code']);
         });
     }
 
