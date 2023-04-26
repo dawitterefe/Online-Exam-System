@@ -58,8 +58,8 @@
                                             <x-tabler-id-badge-2 class="w-5 h-5" />
                                         </x-slot>
 
-                                        <x-form.input withicon id="title" class="block w-full" type="text"
-                                            name="title" :value="old('title')" required autofocus
+                                        <x-form.input withicon id="title" class="block w-full" type="text" name="title"
+                                            :value="old('title')" required autofocus
                                             placeholder="{{ __('Course Title') }}" />
                                     </x-form.input-with-icon-wrapper>
                                 </div>

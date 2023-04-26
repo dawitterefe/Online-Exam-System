@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 use sirajcse\UniqueIdGenerator\UniqueIdGenerator;
 
 class CourseController extends Controller
@@ -33,15 +34,18 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'course_code' => ['required', 'string', 'unique:courses','max:56'],
+            'course_code' => ['required', 'string', 'unique:courses', 'max:56'],
             'title' => ['required', 'string', 'max:100'],
             'credit_hour' => ['required', 'integer'],
         ], ['course_code.unique' => 'This course code already exists.',]);
 
 
-        $request->validate([
-            'course_code' => 'required|unique:courses,course_code',], 
-            ['course_code.unique' => 'This course code already exists.',]);
+        $request->validate(
+            [
+                'course_code' => 'required|unique:courses,course_code',
+            ],
+            ['course_code.unique' => 'This course code already exists.',]
+        );
 
         $course = Course::create([
             'course_code' => $request->course_code,
@@ -74,26 +78,28 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $id)
     {
         $course = Course::findOrFail($id);
 
-
-        $request->validate([
-            'code' => ['required', 'string', 'max:56'],
+        $rules = [
             'title' => ['required', 'string', 'max:100'],
             'credit_hour' => ['required', 'integer'],
-        ]);
+        ];
 
+        // Adding the course_code validation rule conditionally
+        if ($request->course_code != $course->course_code) {
+            $rules['course_code'] = ['required', 'string', 'unique:courses', 'max:56'];
+        }
+        $request->validate($rules, ['course_code.unique' => 'This course code already exists.']);
 
-            $course->course_code = $request->code;
-            $course->course_title = $request->title;
-            $course->credit_hour = $request->credit_hour;
-            $course->save();
-
+        $course->course_code = $request->course_code;
+        $course->course_title = $request->title;
+        $course->credit_hour = $request->credit_hour;
+        $course->save();
 
         return Redirect::route('courses.edit', $course->id)->with('status', 'profile-updated');
-        // return $course;
     }
 
     /**

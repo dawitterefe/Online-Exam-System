@@ -18,12 +18,9 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -34,32 +31,30 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
-    Route::get('/users/trash',[UserController::class, 'trashed'])->name('users.trashed');
+    Route::get('/users/trash', [UserController::class, 'trashed'])->name('users.trashed');
     Route::get('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
     Route::delete('/users/{id}/force-delete', [UserController::class, 'forceDelete'])->name('users.force_delete');
     Route::resource('/users', UserController::class);
 
-    Route::get('/courses/trash',[CourseController::class, 'trashed'])->name('courses.trashed');
+    Route::get('/courses/trash', [CourseController::class, 'trashed'])->name('courses.trashed');
     Route::get('/courses/{id}/restore', [CourseController::class, 'restore'])->name('courses.restore');
     Route::delete('/courses/{id}/force-delete', [CourseController::class, 'forceDelete'])->name('courses.force_delete');
     Route::resource('/courses', CourseController::class);
 
-    Route::get('/students',[UserCourseController::class,'showStudents'])->name('admin.students');
-   
-    Route::get('/students/{id}/assign-course',[UserCourseController::class,'showAssignCourse'])->name('admin.show_assign_course');
-    Route::get('/students/{id}/add-course',[UserCourseController::class,'assignCourse'])->name('admin.assign_course');
-    Route::get('/students/{student_id}/{course_id}/detach-course',[UserCourseController::class,'detachCourse'])->name('admin.detach_course');
-    
-    Route::get('/teachers',[UserCourseController::class,'showTeachers'])->name('admin.teachers');
+    Route::get('/students', [UserCourseController::class, 'showStudents'])->name('admin.students');
+    Route::get('/students/{id}/assign-course', [UserCourseController::class, 'showStudentCourses'])->name('admin.show_student_courses');
+    Route::get('/students/{id}/add-course', [UserCourseController::class, 'assignStudentCourses'])->name('admin.assign_student_courses');
+    Route::get('/students/{student_id}/{course_id}/detach-course', [UserCourseController::class, 'detachStudentCourses'])->name('admin.detach_student_courses');
 
-    Route::get('/teachers/{id}/assign-course',[UserCourseController::class,'showAssignTeacherCourse'])->name('admin.show_assign_teacher_course');
-    Route::get('/teachers/{id}/add-course',[UserCourseController::class,'assignTeacherCourse'])->name('admin.assign_teacher_course');
-    Route::get('/teachers/{techer_id}/{course_id}/remove-course',[UserCourseController::class,'removeTeacherCourse'])->name('admin.remove_course');
+    Route::get('/teachers', [UserCourseController::class, 'showTeachers'])->name('admin.teachers');
+    Route::get('/teachers/{id}/assign-course', [UserCourseController::class, 'showTeacherCourses'])->name('admin.show_teacher_courses');
+    Route::get('/teachers/{id}/add-course', [UserCourseController::class, 'assignTeacherCourses'])->name('admin.assign_teacher_courses');
+    Route::get('/teachers/{techer_id}/{course_id}/remove-course', [UserCourseController::class, 'removeTeacherCourses'])->name('admin.remove_courses');
 
-
-
-
-
+    Route::get('/evaluators', [UserCourseController::class, 'showEvaluators'])->name('admin.evaluators');
+    Route::get('/evaluators/{id}/assign-course', [UserCourseController::class, 'showEvaluatorCourses'])->name('admin.show_evaluator_courses');
+    Route::get('/evaluators/{id}/add-course', [UserCourseController::class, 'assignEvaluatorCourses'])->name('admin.assign_evaluator_courses');
+    Route::get('/evaluators/{evaluator_id}/{course_id}/detach-course', [UserCourseController::class, 'detachEvaluatorCourses'])->name('admin.detach_evaluator_courses');
 });
 
 Route::middleware(['auth', 'role:student'])->group(function () {

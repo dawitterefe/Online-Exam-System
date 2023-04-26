@@ -79,53 +79,54 @@
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
                                 @foreach ($users as $user)
-                                    <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <td
-                                            class="py-2 pl-6 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
-                                        </td>
-                                        <td
-                                            class="py-2 pl-6 pl-3 pr-0 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                            <img src="{{ asset($user->avatar) }}" class="w-7 h-7 my-3 mx-auto rounded-full" alt="Avatar" />
-                                        </td>
-                                        <td
-                                            class="py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->name }} {{ $user->father_name }}</td>
-                                        <td
-                                            class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                            {{ $user->gender }}</td>
-                                        <td
-                                            class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->email }}</td>
-                                        <td
-                                            class="py-2 px-3 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                            {{ $user->role->name }}</td>
-                                        <td
-                                            class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ date('d-m-Y', strtotime($user->created_at)) }}</td>
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <td
+                                        class="py-2 pl-6 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
+                                    </td>
+                                    <td
+                                        class="py-2 pl-6 pl-3 pr-0 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                        <img src="{{ asset($user->avatar) }}" class="w-7 h-7 my-3 mx-auto rounded-full"
+                                            alt="Avatar" />
+                                    </td>
+                                    <td
+                                        class="py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $user->name }} {{ $user->father_name }}</td>
+                                    <td
+                                        class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                        {{ $user->gender }}</td>
+                                    <td
+                                        class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $user->email }}</td>
+                                    <td
+                                        class="py-2 px-3 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                        {{ $user->role->name }}</td>
+                                    <td
+                                        class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ date('d-m-Y', strtotime($user->created_at)) }}</td>
 
-                                        <td class="py-2 pr-2 pl-1 text-sm font-medium text-right whitespace-nowrap">
-                                            <a href="{{ route('users.restore', $user->id) }}"
-                                                class="middle none center rounded-lg bg-green-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                                <i class="fa fa-undo" aria-hidden="true"></i> Restore</a>
-                                        </td>
+                                    <td class="py-2 pr-2 pl-1 text-sm font-medium text-right whitespace-nowrap">
+                                        <a href="{{ route('users.restore', $user->id) }}"
+                                            class="middle none center rounded-lg bg-green-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                            <i class="fa fa-undo" aria-hidden="true"></i> Restore</a>
+                                    </td>
 
 
-                                        <td class="py-2 pr-6 pl-2 text-sm font-medium text-right whitespace-nowrap">
+                                    <td class="py-2 pr-6 pl-2 text-sm font-medium text-right whitespace-nowrap">
 
-                                            <form action="{{ route('users.force_delete', $user->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
+                                        <form action="{{ route('users.force_delete', $user->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
 
-                                                <button
-                                                    class="middle none center rounded-lg bg-red-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                                    data-ripple-light="true">
-                                                    <i class="fa fa-trash-alt"></i> Delete
-                                                </button>
-                                            </form>
-                                        </td>
+                                            <button
+                                                class="middle none center rounded-lg bg-red-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                                data-ripple-light="true">
+                                                <i class="fa fa-trash-alt"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
 
-                                    </tr>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

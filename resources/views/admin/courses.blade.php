@@ -80,55 +80,55 @@
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
                                 @foreach ($courses as $course)
-                                    <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <td
-                                            class="py-5 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ ($courses->currentPage() - 1) * $courses->perPage() + $loop->iteration }}
-                                        </td>
-                                        <td
-                                            class="py-5 px-6 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                            {{ $course->course_code }}</td>
-                                        <td
-                                            class="py-5 px-4 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <div class="w-40 truncate">
-                                                {{ $course->course_title }}
-                                            </div>
-                                        </td>
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <td
+                                        class="py-5 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ ($courses->currentPage() - 1) * $courses->perPage() + $loop->iteration }}
+                                    </td>
+                                    <td
+                                        class="py-5 px-6 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                        {{ $course->course_code }}</td>
+                                    <td
+                                        class="py-5 px-4 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <div class="w-40 truncate">
+                                            {{ $course->course_title }}
+                                        </div>
+                                    </td>
 
-                                        <td
-                                            class="py-5 px-6 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                            {{ $course->credit_hour }}</td>
-                                        <td
-                                            class="py-5 pr-6 pl-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ date('d-m-Y', strtotime($course->created_at)) }}</td>
+                                    <td
+                                        class="py-5 px-6 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                        {{ $course->credit_hour }}</td>
+                                    <td
+                                        class="py-5 pr-6 pl-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ date('d-m-Y', strtotime($course->created_at)) }}</td>
 
-                                        <td class="py-5 pl-1 text-sm font-medium text-right whitespace-nowrap">
-                                            <a href="{{ route('courses.show', $course->id) }}"
-                                                class="middle none center rounded-lg bg-green-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                                <i class="fa fa-book" aria-hidden="true"></i> Show</a>
-                                        </td>
+                                    <td class="py-5 pl-1 text-sm font-medium text-right whitespace-nowrap">
+                                        <a href="{{ route('courses.show', $course->id) }}"
+                                            class="middle none center rounded-lg bg-green-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                            <i class="fa fa-book" aria-hidden="true"></i> Show</a>
+                                    </td>
 
 
-                                        <td class="py-5 pr-2 pl-3 text-sm font-medium text-right whitespace-nowrap">
-                                            <a href="{{ route('courses.edit', $course->id) }}"
-                                                class="middle none center rounded-lg bg-blue-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg-underline hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                                <i class="fa fa-edit"></i> Edit</a>
-                                        </td>
+                                    <td class="py-5 pr-2 pl-3 text-sm font-medium text-right whitespace-nowrap">
+                                        <a href="{{ route('courses.edit', $course->id) }}"
+                                            class="middle none center rounded-lg bg-blue-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg-underline hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                            <i class="fa fa-edit"></i> Edit</a>
+                                    </td>
 
-                                        <td class="py-5 pr-6 pl-2 text-sm font-medium text-right whitespace-nowrap">
-                                            <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
+                                    <td class="py-5 pr-6 pl-2 text-sm font-medium text-right whitespace-nowrap">
+                                        <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
 
-                                                <button
-                                                    class="middle none center rounded-lg bg-red-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                                    data-ripple-light="true">
-                                                    <i class="fa fa-trash-alt"></i> Delete
-                                                </button>
-                                            </form>
-                                        </td>
+                                            <button
+                                                class="middle none center rounded-lg bg-red-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                                data-ripple-light="true">
+                                                <i class="fa fa-trash-alt"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
 
-                                    </tr>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

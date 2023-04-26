@@ -4,8 +4,7 @@
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div class="inline-flex items-center gap-2">
                 <div>
-                    <x-fas-user-graduate class="w-9 h-9" />
-
+                    <x-fas-chalkboard-teacher class="w-9 h-9" />
                 </div>
                 <h2 class="text-xl font-semibold leading-tight">
                     {{ __('Assign Course') }}
@@ -27,14 +26,14 @@
 
                         <div class="mx-10 mt-7 mb-7 flex justify-center items-center gap-3">
                             <div>
-                                <img src="{{ asset($student->user->avatar) }}" class="w-20 h-20 mx-auto rounded-full"
+                                <img src="{{ asset($teacher->user->avatar) }}" class="w-20 h-20 mx-auto rounded-full"
                                     alt="Avatar" />
                             </div>
                             <div>
-                                <h2 class=" font-bold text-xl tracking-wide">{{ $student->user->name }}
-                                    {{ $student->user->father_name }}</h2>
-                                <h1 class="text-sm ">{{ $student->id }}</h1>
-                                <h2 class="text-base tracking-wide">{{ $student->user->email }}</h2>
+                                <h2 class=" font-bold text-xl tracking-wide">{{ $teacher->user->name }}
+                                    {{ $teacher->user->father_name }}</h2>
+                                <h1 class="text-sm ">{{ $teacher->id }}</h1>
+                                <h2 class="text-base tracking-wide">{{ $teacher->user->email }}</h2>
                             </div>
                             <div class="ml-10">
                                 <div class="flex items-center">
@@ -42,13 +41,14 @@
                                         <label class="my-2 font-bold"> <i class="fa-solid fa-book"></i> Assigned
                                             Courses</label>
                                         <div class="grid grid-cols-3 gap-2">
-                                            @foreach ($student->courses as $course)
-                                                <div class="w-[180px] truncate">
-                                                    <a
-                                                        href="{{ route('admin.detach_course', ['student_id'=>$student->id, 'course_id'=>$course->id]) }}"><i
-                                                            class="fa fa-times-circle" style="color: rgb(246, 52, 52); aria-hidden="true"></i></a>
-                                                    {{ $course->course_title }}
-                                                </div>
+                                            @foreach ($teacher->courses as $course)
+                                            <div class="w-[180px] truncate">
+                                                <a
+                                                    href="{{ route('admin.remove_courses', ['techer_id'=>$teacher->id, 'course_id'=>$course->id]) }}"><i
+                                                        class="fa fa-times-circle"
+                                                        style="color: rgb(246, 52, 52); aria-hidden=" true"></i></a>
+                                                {{ $course->course_title }}
+                                            </div>
                                             @endforeach
                                         </div>
 
@@ -59,27 +59,27 @@
 
                         {{-- <div class="border-b-2 my-5 w-5/6 mx-auto"></div> --}}
 
-                        <form method="POST" action="{{ route('admin.assign_course', $student->id) }}">
+                        <form method="POST" action="{{ route('admin.assign_teacher_courses', $teacher->id) }}">
                             @csrf
                             @method('HEAD')
                             {{-- course checkbox --}}
                             <div class="flex justify-center">
                                 <div class="grid grid-cols-3">
                                     @foreach ($courses as $course)
-                                        <div class="flex items-center gap-2 my-2">
+                                    <div class="flex items-center gap-2 my-2">
 
-                                            <div>
-                                                <x-form.input
-                                                    class=" w-1 h-1 before:content[''] peer relative  cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 dark:checked:border-pink-500 dark:checked:bg-pink-500 dark:checked:before:bg-pink-500 hover:before:opacity-10"
-                                                    id="courses[]" name="courses[]" type="checkbox" :value="old('checkbox', $course->id)"
-                                                    autocomplete="email" />
-                                            </div>
-
-                                            <div class="w-64 truncate">
-                                                {{ $course->course_title }}
-                                            </div>
-                                            <x-form.error :messages="$errors->get('email')" />
+                                        <div>
+                                            <x-form.input
+                                                class=" w-1 h-1 before:content[''] peer relative  cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 dark:checked:border-pink-500 dark:checked:bg-pink-500 dark:checked:before:bg-pink-500 hover:before:opacity-10"
+                                                id="courses[]" name="courses[]" type="checkbox"
+                                                :value="old('checkbox', $course->id)" autocomplete="email" />
                                         </div>
+
+                                        <div class="w-64 truncate">
+                                            {{ $course->course_title }}
+                                        </div>
+                                        <x-form.error :messages="$errors->get('email')" />
+                                    </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -94,11 +94,11 @@
                                     </div>
                                     <div>
                                         @if (session('status') === 'profile-updated')
-                                            <p x-data="{ show: true }" x-show="show" x-transition
-                                                x-init="setTimeout(() => show = false, 2000)"
-                                                class="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                                {{ __('Done.') }}
-                                            </p>
+                                        <p x-data="{ show: true }" x-show="show" x-transition
+                                            x-init="setTimeout(() => show = false, 2000)"
+                                            class="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                            {{ __('Done.') }}
+                                        </p>
                                         @endif
                                     </div>
                                 </div>

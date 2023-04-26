@@ -27,7 +27,8 @@
 
                         <div class="mx-3 my-7 justify-center text-center">
                             <div class="mx-4">
-                                <img src="{{ asset($user->avatar) }}" class="w-32 h-32 my-3 mx-auto rounded-full" alt="Avatar" />
+                                <img src="{{ asset($user->avatar) }}" class="w-32 h-32 my-3 mx-auto rounded-full"
+                                    alt="Avatar" />
 
                                 <h2 class=" font-bold text-2xl tracking-wide">{{ $user->name }}
                                     {{ $user->father_name }}</h2>

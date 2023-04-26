@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Evaluator;
 use App\Models\Role;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -79,6 +80,18 @@ class UserController extends Controller
             ]);
         }
 
+        if ($user->role->name == 'Evaluator') {
+
+            $id = UniqueIdGenerator::generate([
+                'table' => 'evaluators', 'length' => 14, 'prefix' => 'dbue-', 'suffix' => date('-Y')
+            ]);
+
+            $teacher = Evaluator::create([
+                'id' => $id,
+                'user_id' => $user->id,
+            ]);
+        }
+
         return redirect()->route('users.index');
         // return $user->role->name;
     }
@@ -114,7 +127,6 @@ class UserController extends Controller
             'name' => ['string', 'max:255'],
             'fname' => ['string', 'max:255'],
             'email' => ['email', 'max:255'],
-            'roles' => ['integer'],
         ]);
 
         if ($request->hasFile('avatar')) {
@@ -138,7 +150,6 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->father_name = $request->fname;
         $user->email = $request->email;
-        $user->role_id = $request->roles;
         $user->gender = $request->input('gender');
 
         $user->save();

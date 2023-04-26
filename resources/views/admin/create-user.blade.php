@@ -73,8 +73,7 @@
                                 <div class="grid gap-3">
                                     <div class="flex">
                                         <div class="flex items-center mr-4">
-                                            <input id="gender" type="radio" value="M"
-                                                name="gender"
+                                            <input id="gender" type="radio" value="M" name="gender"
                                                 class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             <label for=""
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male
@@ -82,8 +81,7 @@
                                         </div>
 
                                         <div class="flex items-center mr-4">
-                                            <input id="gender" type="radio" value="F"
-                                                name="gender"
+                                            <input id="gender" type="radio" value="F" name="gender"
                                                 class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             <label for=""
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female
@@ -101,8 +99,8 @@
                                                     <x-heroicon-o-mail aria-hidden="true" class="w-5 h-5" />
                                                 </x-slot>
 
-                                                <x-form.input withicon id="email" class="block w-full"
-                                                    type="email" name="email" :value="old('email')" required
+                                                <x-form.input withicon id="email" class="block w-full" type="email"
+                                                    name="email" :value="old('email')" required
                                                     placeholder="{{ __('Email') }}" />
                                             </x-form.input-with-icon-wrapper>
                                         </div>
@@ -119,7 +117,7 @@
                                                 <option selected><i class="fa fa-trash-alt"></i>Select a role</option>
 
                                                 @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

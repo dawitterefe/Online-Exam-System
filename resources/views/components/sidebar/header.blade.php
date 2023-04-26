@@ -1,7 +1,7 @@
 <div class="flex items-center justify-between flex-shrink-0 px-3">
     <!-- Logo -->
     <a
-        href="{{ route('dashboard') }}"
+        href="{{ url('/') }}"
         class="inline-flex items-center gap-2"
         >
         <img  aria-hidden="true" src="{{ asset('storage/img/dbu-logo.png') }}" alt="Logo"  class="w-10 h-auto">

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'DBUOES') }}</title>
+    {{-- <title>{{ config('app.name', 'DBUOES') }}</title> --}}
+    <title>DBU Online Exam System</title>
     <link rel="shortcut icon" sizes="114x114" href="{{asset('storage/img/dbu-logo.png')}}">
 
 

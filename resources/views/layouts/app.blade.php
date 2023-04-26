@@ -6,7 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="shortcut icon" sizes="114x114" href="{{asset('storage/img/dbu-logo.png')}}">
-    <title>{{ config('app.name', 'K UI') }}</title>
+    {{-- <title>{{ config('app.name', 'K UI') }}</title> --}}
+    <title>DBU Online Exam System</title>
 
     <!-- Fonts -->
     <link

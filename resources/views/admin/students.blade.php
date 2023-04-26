@@ -73,41 +73,41 @@
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
                                 @foreach ($students as $student)
-                                    <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <td
-                                            class="py-2 pl-6 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ ($students->currentPage() - 1) * $students->perPage() + $loop->iteration }}
-                                        </td>
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <td
+                                        class="py-2 pl-6 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ ($students->currentPage() - 1) * $students->perPage() + $loop->iteration }}
+                                    </td>
 
-                                        <td
-                                            class="py-2 pl-6 pl-3 pr-0 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                            <img src="{{ asset($student->user->avatar) }}"
-                                                class="w-7 h-7 my-3 mx-auto rounded-full" alt="Avatar" />
-                                        </td>
-                                        <td
-                                            class="py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $student->user->name }} {{ $student->user->father_name }}</td>
-                                        <td
-                                            class="py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $student->id }}</td>
-                                        <td
-                                            class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                            {{ $student->user->gender }}</td>
-                                        <td
-                                            class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $student->user->email }}</td>
+                                    <td
+                                        class="py-2 pl-6 pl-3 pr-0 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                        <img src="{{ asset($student->user->avatar) }}"
+                                            class="w-7 h-7 my-3 mx-auto rounded-full" alt="Avatar" />
+                                    </td>
+                                    <td
+                                        class="py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $student->user->name }} {{ $student->user->father_name }}</td>
+                                    <td
+                                        class="py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $student->id }}</td>
+                                    <td
+                                        class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                        {{ $student->user->gender }}</td>
+                                    <td
+                                        class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $student->user->email }}</td>
 
-                                        <td
-                                            class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ date('d-m-Y', strtotime($student->created_at)) }}</td>
+                                    <td
+                                        class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ date('d-m-Y', strtotime($student->created_at)) }}</td>
 
-                                        <td class="py-2 pr-7 pl-0 text-sm font-medium text-right whitespace-nowrap">
-                                            <a href="{{route('admin.show_assign_course',$student->id)}}"
-                                                class="middle none center rounded-lg bg-cyan-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                                <i class="fa-solid fa-book"></i> Course</a>
-                                        </td>
+                                    <td class="py-2 pr-7 pl-0 text-sm font-medium text-right whitespace-nowrap">
+                                        <a href="{{route('admin.show_student_courses',$student->id)}}"
+                                            class="middle none center rounded-lg bg-cyan-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                            <i class="fa-solid fa-book"></i> Course</a>
+                                    </td>
 
-                                    </tr>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

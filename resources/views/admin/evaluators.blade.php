@@ -3,12 +3,13 @@
         <div class="inline-flex items-center gap-2">
 
             <div>
-                <x-fas-chalkboard-teacher class="w-9 h-9" />
+                <x-fluentui-checkbox-person-16-o class="w-10 h-10" />
+                {{-- <x-fluentui-checkbox-person-16 class="w-10 h-10" /> --}}
             </div>
 
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold leading-tight">
-                    {{ __('Teachers') }}
+                    {{ __('Evaluator Control') }}
                 </h2>
             </div>
 
@@ -72,37 +73,38 @@
 
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
-                                @foreach ($teachers as $teacher)
+                                @foreach ($evaluators as $evaluator)
                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <td
                                         class="py-2 pl-6 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ ($teachers->currentPage() - 1) * $teachers->perPage() + $loop->iteration }}
+                                        {{ ($evaluators->currentPage() - 1) * $evaluators->perPage() + $loop->iteration
+                                        }}
                                     </td>
 
                                     <td
                                         class="py-2 pl-6 pl-3 pr-0 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                        <img src="{{ asset($teacher->user->avatar) }}"
+                                        <img src="{{ asset($evaluator->user->avatar) }}"
                                             class="w-7 h-7 my-3 mx-auto rounded-full" alt="Avatar" />
                                     </td>
                                     <td
                                         class="py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $teacher->user->name }} {{ $teacher->user->father_name }}</td>
+                                        {{ $evaluator->user->name }} {{ $evaluator->user->father_name }}</td>
                                     <td
                                         class="py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $teacher->id }}</td>
+                                        {{ $evaluator->id }}</td>
                                     <td
                                         class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                        {{ $teacher->user->gender }}</td>
+                                        {{ $evaluator->user->gender }}</td>
                                     <td
                                         class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $teacher->user->email }}</td>
+                                        {{ $evaluator->user->email }}</td>
 
                                     <td
                                         class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ date('d-m-Y', strtotime($teacher->created_at)) }}</td>
+                                        {{ date('d-m-Y', strtotime($evaluator->created_at)) }}</td>
 
                                     <td class="py-2 pr-7 pl-0 text-sm font-medium text-right whitespace-nowrap">
-                                        <a href="{{route('admin.show_teacher_courses',$teacher->id)}}"
+                                        <a href="{{route('admin.show_evaluator_courses',$evaluator->id)}}"
                                             class="middle none center rounded-lg bg-cyan-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                             <i class="fa-solid fa-book"></i> Course</a>
                                     </td>
@@ -116,16 +118,12 @@
 
                     <div class="px-4 py-2 bg-gray-300 dark:bg-gray-700 ">
 
-                        {{ $teachers->links() }}
+                        {{ $evaluators->links() }}
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 
 </x-app-layout>

@@ -30,14 +30,15 @@
                         <form method="POST" action="{{ route('courses.update', $course->id) }}">
                             @csrf
                             @method('PUT')
+
                             {{-- change course code --}}
                             <div class="space-y-2">
-                                <x-form.label for="code" :value="__('Course Code')" />
+                                <x-form.label for="course_code" :value="__('Course Code')" />
 
-                                <x-form.input id="code" name="code" type="text" class="block w-full"
-                                    :value="old('code', $course->course_code)" required autofocus autocomplete="code" />
+                                <x-form.input id="course_code" name="course_code" type="text" class="block w-full"
+                                    :value="old('course_code', $course->course_code)" required autofocus autocomplete="course_code" />
 
-                                <x-form.error :messages="$errors->get('code')" />
+                                <x-form.error :messages="$errors->get('course_code')" />
                             </div>
 
                             {{-- change course title --}}
@@ -45,7 +46,8 @@
                                 <x-form.label for="title" :value="__('Course Title')" />
 
                                 <x-form.input id="title" name="title" type="text" class="block w-full"
-                                    :value="old('title', $course->course_title)" required autofocus autocomplete="title" />
+                                    :value="old('title', $course->course_title)" required autofocus
+                                    autocomplete="title" />
 
                                 <x-form.error :messages="$errors->get('title')" />
                             </div>
@@ -57,7 +59,8 @@
                                 <x-form.label for="credit_hour" :value="__('Credit Hour')" />
 
                                 <x-form.input id="credit_hour" name="credit_hour" type="text" class="block w-mini"
-                                    :value="old('credit_hour', $course->credit_hour)" required autofocus autocomplete="credit_hour" />
+                                    :value="old('credit_hour', $course->credit_hour)" required autofocus
+                                    autocomplete="credit_hour" />
 
                                 <x-form.error :messages="$errors->get('credit_hour')" />
                             </div>
@@ -71,11 +74,11 @@
                                     </div>
                                     <div>
                                         @if (session('status') === 'profile-updated')
-                                            <p x-data="{ show: true }" x-show="show" x-transition
-                                                x-init="setTimeout(() => show = false, 2000)"
-                                                class="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                                {{ __('Updated.') }}
-                                            </p>
+                                        <p x-data="{ show: true }" x-show="show" x-transition
+                                            x-init="setTimeout(() => show = false, 2000)"
+                                            class="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                            {{ __('Updated.') }}
+                                        </p>
                                         @endif
                                     </div>
                                 </div>

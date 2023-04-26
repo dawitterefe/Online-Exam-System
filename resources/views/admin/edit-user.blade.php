@@ -67,8 +67,8 @@
                                             <div class="space-y-2">
                                                 <x-form.label for="name" :value="__('First Name')" />
 
-                                                <x-form.input id="name" name="name" type="text"
-                                                    class="block w-full" :value="old('name', $user->name)" required autofocus
+                                                <x-form.input id="name" name="name" type="text" class="block w-full"
+                                                    :value="old('name', $user->name)" required autofocus
                                                     autocomplete="name" />
 
                                                 <x-form.error :messages="$errors->get('name')" />
@@ -78,8 +78,8 @@
                                             <div class="space-y-2">
                                                 <x-form.label for="fname" :value="__('Father Name')" />
 
-                                                <x-form.input id="fname" name="fname" type="text"
-                                                    class="block w-full" :value="old('fname', $user->father_name)" required autofocus
+                                                <x-form.input id="fname" name="fname" type="text" class="block w-full"
+                                                    :value="old('fname', $user->father_name)" required autofocus
                                                     autocomplete="name" />
 
                                                 <x-form.error :messages="$errors->get('name')" />
@@ -88,20 +88,26 @@
                                             {{-- gender --}}
                                             <div class="flex">
                                                 <div class="flex items-center mr-4">
-                                                    <input id="gender" type="radio"
-                                                        value="M"{{ $user->gender == 'M' ? 'checked' : '' }}
-                                                        name="gender"
-                                                        class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                    <input id="gender" type="radio" value="M" {{ $user->gender == 'M' ?
+                                                    'checked' : '' }}
+                                                    name="gender"
+                                                    class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400
+                                                    focus:ring-cyan-500 dark:focus:ring-cyan-600
+                                                    dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                                                    dark:border-gray-600">
                                                     <label for=""
                                                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male
                                                     </label>
                                                 </div>
 
                                                 <div class="flex items-center mr-4">
-                                                    <input id="gender" type="radio"
-                                                        value="F"{{ $user->gender == 'F' ? 'checked' : '' }}
-                                                        name="gender"
-                                                        class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                    <input id="gender" type="radio" value="F" {{ $user->gender == 'F' ?
+                                                    'checked' : '' }}
+                                                    name="gender"
+                                                    class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400
+                                                    focus:ring-cyan-500 dark:focus:ring-cyan-600
+                                                    dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                                                    dark:border-gray-600">
                                                     <label for=""
                                                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female
                                                     </label>
@@ -111,16 +117,15 @@
                                             <div class="space-y-2">
                                                 <x-form.label for="email" :value="__('Email')" />
 
-                                                <x-form.input id="email" name="email" type="email"
-                                                    class="block w-full" :value="old('email', $user->email)" required
-                                                    autocomplete="email" />
+                                                <x-form.input id="email" name="email" type="email" class="block w-full"
+                                                    :value="old('email', $user->email)" required autocomplete="email" />
 
                                                 <x-form.error :messages="$errors->get('email')" />
 
                                             </div>
 
                                             {{-- Role --}}
-                                            <div class="space-y-2">
+                                            {{-- <div class="space-y-2">
 
                                                 <x-form.label for="roles" :value="__('Role')" />
 
@@ -131,12 +136,12 @@
                                                     </option>
 
                                                     @foreach ($roles as $role)
-                                                        <option {{ $role->id == $user->role_id ? 'selected' : '' }}
-                                                            value="{{ $role->id }}">{{ $role->name }}
-                                                        </option>
+                                                    <option {{ $role->id == $user->role_id ? 'selected' : '' }}
+                                                        value="{{ $role->id }}">{{ $role->name }}
+                                                    </option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> --}}
 
                                             {{-- save --}}
                                             <div class="mt-5 mb-10 flex justify-end">
@@ -148,11 +153,11 @@
                                                     </div>
                                                     <div>
                                                         @if (session('status') === 'profile-updated')
-                                                            <p x-data="{ show: true }" x-show="show" x-transition
-                                                                x-init="setTimeout(() => show = false, 2000)"
-                                                                class="text-sm font-bold text-gray-600 dark:text-gray-400">
-                                                                {{ __('Updated.') }}
-                                                            </p>
+                                                        <p x-data="{ show: true }" x-show="show" x-transition
+                                                            x-init="setTimeout(() => show = false, 2000)"
+                                                            class="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                                            {{ __('Updated.') }}
+                                                        </p>
                                                         @endif
                                                     </div>
                                                 </div>

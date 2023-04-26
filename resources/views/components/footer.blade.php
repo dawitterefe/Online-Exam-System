@@ -1,5 +1,6 @@
 <footer class="flex-shrink-0 px-6 py-4">
-    <footer class="flex flex-col items-center justify-between px-4 py-12 mx-auto max-w-7xl md:flex-row">
+   
+  <footer class="flex flex-col items-center justify-between px-4 py-12 mx-auto max-w-7xl md:flex-row">
         <p class="mb-8 text-sm text-center text-700 md:text-left md:mb-0">© Copyright 2023 Debre Birhan University. All Rights Reserved.</p>
 
         <div class="flex items-center space-x-6">
@@ -28,6 +29,7 @@
           </a>
         </div>
       </footer>
+      
     </footer>
 
 
