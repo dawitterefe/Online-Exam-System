@@ -17,6 +17,7 @@
         </div>
 
     </x-slot>
+
     <!-- component -->
     <div class="max-w-5xl mt-3 mx-auto">
         <div class="flex flex-col">
@@ -110,7 +111,6 @@
                                             class="middle none center rounded-lg bg-green-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                             <i class="fa fa-undo" aria-hidden="true"></i> Restore</a>
                                     </td>
-
 
                                     <td class="py-2 pr-6 pl-2 text-sm font-medium text-right whitespace-nowrap">
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserCourseController;
+use App\Http\Controllers\Teacher\ExamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -57,15 +58,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/evaluators/{evaluator_id}/{course_id}/detach-course', [UserCourseController::class, 'detachEvaluatorCourses'])->name('admin.detach_evaluator_courses');
 });
 
+Route::middleware(['auth', 'role:teacher'])->group(function () {
+
+    Route::view('/teacher', 'teacher.dashboard')->name('teacher.dashboard');
+    Route::get('/exams/trash', [ExamController::class, 'trashed'])->name('exams.trashed');
+    Route::get('/exams/{id}/restore', [ExamController::class, 'restore'])->name('exams.restore');
+    Route::delete('/exams/{id}/force-delete', [ExamController::class, 'forceDelete'])->name('exams.force_delete');
+
+    Route::resource('/exams', ExamController::class);
+});
+
 Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::view('/student', 'student.dashboard')->name('student.dashboard');
 });
 
-Route::middleware(['auth', 'role:teacher'])->group(function () {
 
-    Route::view('/teacher', 'teacher.dashboard')->name('teacher.dashboard');
-});
 
 Route::middleware(['auth', 'role:evaluator'])->group(function () {
 

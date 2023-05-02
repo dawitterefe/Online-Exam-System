@@ -19,9 +19,6 @@
 
     </x-slot>
 
-
-
-
     <!-- component -->
     <div class="max-w-xl mt-0 mx-auto">
         <div class="flex flex-col">

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon" sizes="114x114" href="{{asset('storage/img/dbu-logo.png')}}">
+    <link rel="shortcut icon" sizes="114x114" href="{{ asset('storage/img/dbu-logo.png') }}">
     {{-- <title>{{ config('app.name', 'K UI') }}</title> --}}
     <title>DBU Online Exam System</title>
 
@@ -31,8 +31,8 @@
         <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-eval-0 dark:text-gray-200">
 
             <!-- Page Wrapper -->
-            <div class="flex flex-col min-h-screen" :class="{'md:ml-16': !isSidebarOpen }" >
-                
+            <div class="flex flex-col min-h-screen" :class="{ 'md:ml-16': !isSidebarOpen }">
+
                 <!-- Navbar -->
                 <nav aria-label="secondary" x-data="{ open: false }"
                     class="sticky top-0 z-10 flex items-center justify-between px-4 py-3 sm:px-6 transition-transform duration-500 bg-white dark:bg-dark-eval-1"
@@ -52,7 +52,8 @@
                                     <x-application-logo aria-hidden="true" />
                                 </div>
 
-                                <div class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline
+                                <div
+                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline
                                 focus:outline-2 focus:rounded-sm focus:outline-cyan-500">
 
                                     DBU Online Exmination System
@@ -66,21 +67,41 @@
                     <div class="flex items-center justify-end gap-3">
                         <div>
                             @if (Route::has('login'))
-                            <div class="pr-0">
-                                @auth
-                                <a href="{{ url('/admin') }}"
-                                    class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Dashboard</a>
-                                @else
-                                <a href="{{ route('login') }}"
-                                    class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Log
-                                    in</a>
+                                <div class="pr-0">
+                                    @auth
 
-                                @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="ml-4 font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Register</a>
-                                @endif
-                                @endauth
-                            </div>
+                                        @if (Auth::user()->role->name == 'Admin')
+                                        <a href="{{ url('/admin') }}"
+                                        class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                                        Dashboard</a>
+                                        @endif
+                                        @if (Auth::user()->role->name == 'Teacher')
+                                        <a href="{{ url('/teacher') }}"
+                                        class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                                        Dashboard</a>
+                                        @endif
+                                        @if (Auth::user()->role->name == 'Evaluator')
+                                        <a href="{{ url('/evaluator') }}"
+                                        class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                                        Dashboard</a>
+                                        @endif
+                                        @if (Auth::user()->role->name == 'Student')
+                                        <a href="{{ url('/student') }}"
+                                        class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                                        Dashboard</a>
+                                        @endif
+
+                                    @else
+                                        <a href="{{ route('login') }}"
+                                            class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Log
+                                            in</a>
+
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}"
+                                                class="ml-4 font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Register</a>
+                                        @endif
+                                    @endauth
+                                </div>
                             @endif
                         </div>
 
@@ -100,18 +121,19 @@
                 <!-- Page Content -->
                 <main class="px-4 sm:px-6 flex-1 mx-5 my-5">
 
-                    <div class=""> <span class="font-bold text-5xl flex justify-center mt-10"> Welcome!</span></div>
+                    <div class=""> <span class="font-bold text-5xl flex justify-center mt-10"> Welcome!</span>
+                    </div>
 
                 </main>
 
-                
+
 
                 <!-- Mobile bottom bar -->
                 <div class="fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white md:hidden dark:bg-dark-eval-1"
                     :class="{
-                                    'translate-y-full': scrollingDown,
-                                    'translate-y-0': scrollingUp,
-                                }">
+                        'translate-y-full': scrollingDown,
+                        'translate-y-0': scrollingUp,
+                    }">
                     <a href="{{ url('/') }}">
 
                         <div class="inline-flex items-center gap-2">

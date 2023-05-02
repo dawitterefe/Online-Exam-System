@@ -4,7 +4,29 @@ import Alpine from 'alpinejs'
 import collapse from '@alpinejs/collapse'
 import PerfectScrollbar from 'perfect-scrollbar'
 
+import flatpickr from "flatpickr";
+window.flatpickr = flatpickr;
+
 window.PerfectScrollbar = PerfectScrollbar
+
+document.addEventListener('DOMContentLoaded', function () {
+    flatpickr('#start_time', {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+        time_24hr: true,
+        theme: "material_blue",
+        className: "rounded border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:ring-opacity-50"
+    });
+    flatpickr('#end_time', {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+        time_24hr: true,
+        theme: "material_blue",
+        className: "rounded border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:ring-opacity-50"
+    });
+});
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('mainState', () => {

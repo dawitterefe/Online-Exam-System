@@ -15,8 +15,6 @@
         </div>
 
     </x-slot>
-
-
     <!-- component -->
     <div class="max-w-5xl mt-3 mx-auto">
 

@@ -1,3 +1,7 @@
+
+@import "flatpickr/dist/flatpickr.min.css";
+@import "flatpickr/dist/themes/material_blue.css";
+
 @import "@fortawesome/fontawesome-free/css/all.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
