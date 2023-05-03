@@ -37,6 +37,22 @@
                                 <div class="inline-flex items-center gap-3">
                                     {{-- first group? --}}
                                     <div>
+                                        <!-- Course-->
+                                        <div class="space-y-2 mb-2">
+
+                                            <x-form.label for="course" :value="__('Course')" />
+
+                                            <select id="course" name="course"
+                                                class="w-full py-2  border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1">
+
+                                                <option selected>Select the course</option>
+
+                                                @foreach ($courses as $course)
+                                                    <option value="{{ $course->id }}">{{ $course->course_title }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
                                         <!-- exam name-->
                                         <div class="space-y-2 mb-2">
@@ -52,28 +68,11 @@
                                                     placeholder="{{ __('Exam Name') }}" />
                                             </x-form.input-with-icon-wrapper>
                                         </div>
-                                        <!-- exam description-->
-                                        <div class="space-y-2 mb-2">
-                                            <x-form.label for="description" :value="__('Description')" />
 
-                                            <x-form.input-with-icon-wrapper>
-                                                <x-slot name="icon">
-                                                    {{-- <x-tabler-id-badge-2 class="w-5 h-5" /> --}}
-                                                </x-slot>
 
-                                                <textarea
-                                                    class="block w-full py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1"
-                                                    placeholder="{{ __('Description') }}" name="description" id="description" rows="1">
-                                        </textarea>
-                                                {{-- <x-form.input withicon id="description" class="block w-full" type="text" name="description"
-                                            :value="old('description')" required autofocus
-                                            placeholder="{{ __('Description') }}" /> --}}
-
-                                            </x-form.input-with-icon-wrapper>
-                                        </div>
                                         {{-- total Q and passing score --}}
                                         <div class="inline-flex items-center gap-3">
-                                            <!-- total q-->
+                                            <!-- total questions-->
                                             <div class="space-y-2 ">
                                                 <x-form.label for="total_questions" :value="__('Total Questions')" />
 
@@ -107,22 +106,22 @@
 
                                     {{-- second group --}}
                                     <div>
-                                        <!-- Course -->
+                                        <!-- Exam Description -->
                                         <div class="space-y-2 mb-2">
+                                            <x-form.label for="description" :value="__('Description')" />
 
-                                            <x-form.label for="course" :value="__('Course')" />
+                                            <x-form.input-with-icon-wrapper>
+                                                <x-slot name="icon">
+                                                    {{-- <x-tabler-id-badge-2 class="w-5 h-5" /> --}}
+                                                </x-slot>
 
-                                            <select id="course" name="course"
-                                                class="w-full py-2  border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1">
+                                                <textarea
+                                                    class="block w-full py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1"
+                                                    placeholder="{{ __('Description') }}" name="description" id="description" rows="1"></textarea>
 
-                                                <option selected>Select the course</option>
-
-                                                @foreach ($courses as $course)
-                                                    <option value="{{ $course->id }}">{{ $course->course_title }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            </x-form.input-with-icon-wrapper>
                                         </div>
+                                        
                                         {{-- start and end --}}
                                         <div class="inline-flex items-center gap-3">
                                             <!-- start time-->
@@ -131,7 +130,7 @@
 
                                                 <x-form.input-with-icon-wrapper>
                                                     <x-slot name="icon">
-                                                        <x-uni-calender-o class="w-5 h-5"/>
+                                                        <x-uni-calender-o class="w-5 h-5" />
                                                     </x-slot>
 
                                                     <x-form.input withicon id="start_time" class="block w-full"
@@ -145,7 +144,7 @@
 
                                                 <x-form.input-with-icon-wrapper>
                                                     <x-slot name="icon">
-                                                        <x-uni-calender-o class="w-5 h-5"/>
+                                                        <x-uni-calender-o class="w-5 h-5" />
                                                     </x-slot>
 
                                                     <x-form.input withicon id="end_time" class="block w-full"

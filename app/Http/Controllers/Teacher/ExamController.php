@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Exam;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 
 class ExamController extends Controller
@@ -69,7 +71,8 @@ class ExamController extends Controller
     public function show(string $id)
     {
         $exam = Exam::findOrFail($id);
-        return view('teacher.show-exam', compact('exam'));
+        $questions =  Question::where('exam_id',$exam->id)->get();
+        return view('teacher.show-exam', compact('exam','questions'));
     }
 
     /**
@@ -88,7 +91,32 @@ class ExamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $exam = Exam::findOrfail($id);
+
+        $request->validate([
+            'exam_name' => [ 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'course' => [ 'exists:courses,id'],
+            'total_questions' => ['integer', 'min:1'],
+            'passing_score' => ['integer', 'min:1'],
+            'duration' => ['integer', 'min:1'],
+            'start_time' => ['date_format:Y-m-d H:i'],
+            'end_time' => ['date_format:Y-m-d H:i'],
+
+        ]);
+
+        $exam->name = $request->exam_name;
+        $exam->course_id = $request->courses;
+        $exam->description = $request->description;
+        $exam->total_questions = $request->total_questions;
+        $exam->passing_score = $request->passing_score;
+        $exam->duration = $request->duration;
+        $exam->start_time = $request->start_time;
+        $exam->end_time = $request->end_time;
+
+        $exam->save();
+
+        return Redirect::route('exams.edit', $exam->id)->with('status', 'profile-updated');
     }
 
     /**
@@ -111,8 +139,8 @@ class ExamController extends Controller
     public function restore($id)
     {
 
-        $user = Exam::onlyTrashed()->findOrFail($id);
-        $user->restore();
+        $exam = Exam::onlyTrashed()->findOrFail($id);
+        $exam->restore();
 
         return redirect()->route('exams.index');
     }

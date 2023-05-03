@@ -78,7 +78,7 @@
         </x-sidebar.link>
         {{-- Exam Control --}}
         <x-sidebar.link title="Exam Hub" href="{{ route('exams.index') }}" :isActive="in_array(
-            request()->route()->getName(),['exams.index','exams.create','exams.show','exams.create','exams.delete', 'exams.trashed','exams.edit'])">
+            request()->route()->getName(),['exams.index','exams.create','exams.show','exams.create','exams.delete', 'exams.trashed','exams.edit','question.create'])">
             <x-slot name="icon">
                 <x-majestic-checkbox-list-detail-solid class="w-6 h-6" />
             </x-slot>

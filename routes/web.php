@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserCourseController;
 use App\Http\Controllers\Teacher\ExamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\teacher\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// ADMIN ROUTES
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
@@ -58,25 +60,29 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/evaluators/{evaluator_id}/{course_id}/detach-course', [UserCourseController::class, 'detachEvaluatorCourses'])->name('admin.detach_evaluator_courses');
 });
 
+// TEACHER ROUTES
 Route::middleware(['auth', 'role:teacher'])->group(function () {
 
     Route::view('/teacher', 'teacher.dashboard')->name('teacher.dashboard');
     Route::get('/exams/trash', [ExamController::class, 'trashed'])->name('exams.trashed');
     Route::get('/exams/{id}/restore', [ExamController::class, 'restore'])->name('exams.restore');
     Route::delete('/exams/{id}/force-delete', [ExamController::class, 'forceDelete'])->name('exams.force_delete');
-
     Route::resource('/exams', ExamController::class);
+
+   Route::get('/question/{id}/create', [QuestionController::class, 'create'])->name('question.create');
+   Route::post('/question', [QuestionController::class, 'store'])->name('question.store');
+
 });
 
+// STUDENT ROUTES
 Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::view('/student', 'student.dashboard')->name('student.dashboard');
 });
 
 
-
+// EVALUATOR ROUTES
 Route::middleware(['auth', 'role:evaluator'])->group(function () {
-
     Route::view('/evaluator', 'evaluator.dashboard')->name('evaluator.dashboard');
 });
 

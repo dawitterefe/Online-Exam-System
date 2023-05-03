@@ -19,7 +19,7 @@
     </x-slot>
 
     <!-- component -->
-    <div class="max-w-3xl mt-0 mx-auto">
+    <div class="max-w-4xl mt-0 mx-auto">
         <div class="flex flex-col">
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800">
@@ -37,51 +37,131 @@
                                     </h1>
                                 </div>
 
+                                <div class="flex items-center gap-3">
+                                    {{-- Group One --}}
+                                    <div>
+                                        {{-- Course --}}
+                                        <div class="space-y-2  mb-2">
+                                            <x-form.label for="courses" :value="__('Course')" />
 
-                                {{-- change name input --}}
-                                <div class="space-y-2">
-                                    <x-form.label for="name" :value="__('Exam Name')" />
+                                            <select id="courses" name="courses"
+                                                class="block w-full py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1">
 
-                                    <x-form.input id="name" name="name" type="text" class="block w-full"
-                                        :value="old('name', $exam->name)" required autofocus autocomplete="name" />
+                                                <option selected><i class="fa fa-trash-alt"></i>Select a course
+                                                </option>
 
-                                    <x-form.error :messages="$errors->get('name')" />
+                                                @foreach ($courses as $course)
+                                                    <option {{ $course->id == $exam->course_id ? 'selected' : '' }}
+                                                        value="{{ $course->id }}">{{ $course->course_title }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        {{-- change name input --}}
+                                        <div class="space-y-2  mb-2">
+                                            <x-form.label for="exam_name" :value="__('Exam Name')" />
+
+                                            <x-form.input id="exam_name" name="exam_name" type="text"
+                                                class="block w-full" :value="old('exam_name', $exam->name)"  autofocus
+                                                autocomplete="exam_name" />
+
+                                            <x-form.error :messages="$errors->get('exam_name')" />
+                                        </div>
+
+                                        {{-- total Q and passing score --}}
+                                        <div class="inline-flex items-center gap-3">
+                                            <!-- total questions-->
+                                            <div class="space-y-2">
+                                                <x-form.label for="total_questions" :value="__('Total Questions')" />
+
+                                                <x-form.input id="total_questions" name="total_questions" type="text"
+                                                    class="block w-full" :value="old('total_questions', $exam->total_questions)"  autofocus
+                                                    autocomplete="total_questions" />
+
+                                                <x-form.error :messages="$errors->get('total_questions')" />
+                                            </div>
+
+                                            <!-- Passing Score-->
+                                            <div class="space-y-2">
+                                                <x-form.label for="passing_score" :value="__('Passing Score')" />
+
+                                                <x-form.input id="passing_score" name="passing_score" type="text"
+                                                    class="block w-full" :value="old('passing_score', $exam->passing_score)"  autofocus
+                                                    autocomplete="passing_score" />
+
+                                                <x-form.error :messages="$errors->get('passing_score')" />
+                                            </div>
+                                            <!-- Duration-->
+                                            <div class="space-y-2">
+                                                <x-form.label for="duration" :value="__('Duration')" />
+
+                                                <x-form.input id="duration" name="duration" type="text"
+                                                    class="block w-full" :value="old('duration', $exam->duration)"  autofocus
+                                                    autocomplete="duration" />
+
+                                                <x-form.error :messages="$errors->get('duration')" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{-- Group Two --}}
+                                    <div>
+                                        {{-- change name input --}}
+                                        <div class="space-y-2  mb-2">
+                                            <x-form.label for="name" :value="__('Exam Name')" />
+
+                                            <x-form.input id="name" name="name" type="text"
+                                                class="block w-full" :value="old('name', $exam->name)"  autofocus
+                                                autocomplete="name" />
+
+                                            <x-form.error :messages="$errors->get('name')" />
+                                        </div>
+
+                                        {{-- Start and end DateTime --}}
+                                        <div class="inline-flex items-center gap-3 ">
+                                            <!-- Start Time-->
+                                            <div class="space-y-2 mb-2">
+                                                <x-form.label for="start_time" :value="__('Start Time')" />
+
+                                                <x-form.input id="start_time" name="start_time" type="text"
+                                                    class="block w-full" :value="old('start_time', $exam->start_time)"  autofocus
+                                                    autocomplete="start_time" />
+
+                                                <x-form.error :messages="$errors->get('start_time')" />
+                                            </div>
+
+                                            <!-- end time-->
+                                            <div class="space-y-2  mb-2">
+                                                <x-form.label for="end_time" :value="__('End Time')" />
+
+                                                <x-form.input id="end_time" name="end_time" type="text"
+                                                    class="block w-full" :value="old('end_time', $exam->end_time)"  autofocus
+                                                    autocomplete="end_time" />
+
+                                                <x-form.error :messages="$errors->get('end_time')" />
+                                            </div>
+                                        </div>
+                                        <!-- exam description-->
+                                        <div class="space-y-2 mb-2">
+                                            <x-form.label for="description" :value="__('Description')" />
+
+                                            <x-form.input-with-icon-wrapper>
+                                                <x-slot name="icon">
+                                                    {{-- <x-tabler-id-badge-2 class="w-5 h-5" /> --}}
+                                                </x-slot>
+
+                                                <textarea
+                                                    class="block w-full py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1"
+                                                    name="description" :value="old('description', $exam - > description)" id="description" rows="2">{{ $exam->description }}</textarea>
+                                            </x-form.input-with-icon-wrapper>
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
-                                <!-- exam description-->
-                                <div class="space-y-2 mb-2">
-                                    <x-form.label for="description" :value="__('Description')" />
 
-                                    <x-form.input-with-icon-wrapper>
-                                        <x-slot name="icon">
-                                            {{-- <x-tabler-id-badge-2 class="w-5 h-5" /> --}}
-                                        </x-slot>
-
-                                        <textarea
-                                            class="block w-full py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1"
-                                            placeholder="{{ __('Description') }}" name="description" :value="old('description', $exam - > description)"
-                                            id="description" rows="1">
-                                                    </textarea>
-                                    </x-form.input-with-icon-wrapper>
-                                </div>
-
-                                {{-- Course --}}
-                                <div class="space-y-2">
-                                    <x-form.label for="courses" :value="__('course')" />
-
-                                    <select id="courses" name="courses"
-                                        class="py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1">
-
-                                        <option selected><i class="fa fa-trash-alt"></i>Select a course
-                                        </option>
-
-                                        @foreach ($courses as $course)
-                                            <option {{ $course->id == $exam->course_id ? 'selected' : '' }}
-                                                value="{{ $course->id }}">{{ $course->course_title }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
 
                                 {{-- save --}}
                                 <div class="mt-5 mb-10 flex justify-end">
