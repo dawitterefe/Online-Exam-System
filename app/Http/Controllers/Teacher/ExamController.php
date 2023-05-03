@@ -71,7 +71,7 @@ class ExamController extends Controller
     public function show(string $id)
     {
         $exam = Exam::findOrFail($id);
-        $questions =  Question::where('exam_id',$exam->id)->get();
+        $questions =  Question::where('exam_id',$exam->id)->latest()->paginate(5);
         return view('teacher.show-exam', compact('exam','questions'));
     }
 

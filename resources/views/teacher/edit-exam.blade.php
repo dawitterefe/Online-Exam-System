@@ -4,7 +4,7 @@
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div class="inline-flex items-center gap-2">
                 <div>
-                    <x-fas-user-edit class="w-9 h-9" />
+                    <x-majestic-checkbox-list-detail-solid class="w-9 h-9" />
                 </div>
                 <h2 class="text-xl font-semibold leading-tight">
                     {{ __('Edit Exam Data') }}
@@ -109,13 +109,13 @@
                                     <div>
                                         {{-- change name input --}}
                                         <div class="space-y-2  mb-2">
-                                            <x-form.label for="name" :value="__('Exam Name')" />
+                                            <x-form.label for="exam_name" :value="__('Exam Name')" />
 
-                                            <x-form.input id="name" name="name" type="text"
-                                                class="block w-full" :value="old('name', $exam->name)"  autofocus
-                                                autocomplete="name" />
+                                            <x-form.input id="exam_name" name="exam_name" type="text"
+                                                class="block w-full" :value="old('exam_name', $exam->name)"  autofocus
+                                                autocomplete="exam_name" />
 
-                                            <x-form.error :messages="$errors->get('name')" />
+                                            <x-form.error :messages="$errors->get('exam_name')" />
                                         </div>
 
                                         {{-- Start and end DateTime --}}
@@ -160,7 +160,6 @@
                                     </div>
 
                                 </div>
-
 
 
                                 {{-- save --}}

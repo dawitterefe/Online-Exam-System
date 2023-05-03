@@ -38,7 +38,7 @@
                                     {{-- first group? --}}
                                     <div>
                                         <!-- Course-->
-                                        <div class="space-y-2 mb-2">
+                                        <div class="space-y-2">
 
                                             <x-form.label for="course" :value="__('Course')" />
 
@@ -55,7 +55,7 @@
                                         </div>
 
                                         <!-- exam name-->
-                                        <div class="space-y-2 mb-2">
+                                        <div class="space-y-2">
                                             <x-form.label for="exam_name" :value="__('Exam Name')" />
 
                                             <x-form.input-with-icon-wrapper>
@@ -107,7 +107,7 @@
                                     {{-- second group --}}
                                     <div>
                                         <!-- Exam Description -->
-                                        <div class="space-y-2 mb-2">
+                                        <div class="space-y-2">
                                             <x-form.label for="description" :value="__('Description')" />
 
                                             <x-form.input-with-icon-wrapper>
@@ -121,11 +121,11 @@
 
                                             </x-form.input-with-icon-wrapper>
                                         </div>
-                                        
+
                                         {{-- start and end --}}
                                         <div class="inline-flex items-center gap-3">
                                             <!-- start time-->
-                                            <div class="space-y-2 mb-2">
+                                            <div class="space-y-2">
                                                 <x-form.label for="start_time" :value="__('Start Time')" />
 
                                                 <x-form.input-with-icon-wrapper>
@@ -139,7 +139,7 @@
                                                 </x-form.input-with-icon-wrapper>
                                             </div>
                                             <!-- End time-->
-                                            <div class="space-y-2 mb-2">
+                                            <div class="space-y-2">
                                                 <x-form.label for="end_time" :value="__('End Time')" />
 
                                                 <x-form.input-with-icon-wrapper>

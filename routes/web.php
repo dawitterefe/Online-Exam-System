@@ -69,8 +69,12 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::delete('/exams/{id}/force-delete', [ExamController::class, 'forceDelete'])->name('exams.force_delete');
     Route::resource('/exams', ExamController::class);
 
-   Route::get('/question/{id}/create', [QuestionController::class, 'create'])->name('question.create');
-   Route::post('/question', [QuestionController::class, 'store'])->name('question.store');
+    Route::get('/question/{id}/create', [QuestionController::class, 'create'])->name('question.create');
+    Route::post('/question', [QuestionController::class, 'store'])->name('question.store');
+    Route::delete('/question/{id}/delete', [QuestionController::class, 'destroy'])->name('question.destroy');
+    Route::get('/question/{question_id}/{exam_id}/edit', [QuestionController::class, 'edit'])->name('question.edit');
+    Route::put('/question/{id}/update', [QuestionController::class, 'update'])->name('question.update');
+
 
 });
 
