@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserCourseController;
+use App\Http\Controllers\Evaluator\ExamEvaluationController;
 use App\Http\Controllers\Teacher\ExamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -74,9 +75,18 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::delete('/question/{id}/delete', [QuestionController::class, 'destroy'])->name('question.destroy');
     Route::get('/question/{question_id}/{exam_id}/edit', [QuestionController::class, 'edit'])->name('question.edit');
     Route::put('/question/{id}/update', [QuestionController::class, 'update'])->name('question.update');
-
-
 });
+
+
+// EVALUATOR ROUTES
+Route::middleware(['auth', 'role:evaluator'])->group(function () {
+    Route::view('/evaluator', 'evaluator.dashboard')->name('evaluator.dashboard');
+    Route::get('/exam-review',[ExamEvaluationController::class, 'index'])->name('exam-review.index');
+    Route::get('/exam-review/{id}',[ExamEvaluationController::class, 'show'])->name('exam-review.show');
+    Route::get('/exam-approval/{id}',[ExamEvaluationController::class,'setApprovalStatus'])->name('exam-review.approval');
+    Route::get('/exam-review/{id}/destroy', [ExamEvaluationController::class, 'destroy'])->name('exam-review.destroy');
+});
+
 
 // STUDENT ROUTES
 Route::middleware(['auth', 'role:student'])->group(function () {
@@ -85,10 +95,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 });
 
 
-// EVALUATOR ROUTES
-Route::middleware(['auth', 'role:evaluator'])->group(function () {
-    Route::view('/evaluator', 'evaluator.dashboard')->name('evaluator.dashboard');
-});
+
 
 
 

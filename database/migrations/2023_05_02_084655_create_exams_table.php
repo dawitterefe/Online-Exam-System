@@ -23,7 +23,6 @@ return new class extends Migration
             $table->integer('duration')->default(90);
             $table->dateTime('start_time');
             $table->dateTime('end_time');
-            $table->integer('approval_status')->default(0);
             $table->boolean('is_active')->default(false);
             $table->timestamps();
             $table->softDeletes();

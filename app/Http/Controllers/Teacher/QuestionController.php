@@ -85,6 +85,7 @@ class QuestionController extends Controller
     {
         $question = Question::findOrFail($id);
         $question->delete();
+        
         return redirect()->back();
     }
 }

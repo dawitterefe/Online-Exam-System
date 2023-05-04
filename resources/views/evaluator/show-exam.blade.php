@@ -4,10 +4,10 @@
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div class="inline-flex items-center gap-2">
                 <div>
-                    <x-majestic-checkbox-list-detail-solid class="w-9 h-9" />
+                    <x-gmdi-rate-review-o class="w-9 h-9" />
                 </div>
                 <h2 class="text-xl font-semibold leading-tight">
-                    {{ __('Exam Control') }}
+                    {{ __('Exam Evaluation') }}
                 </h2>
             </div>
 
@@ -23,13 +23,7 @@
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800">
                     <div class="overflow-hidden ">
-                        <div class="flex  mb-5 mt-3 mr-6 justify-end gap-2 ... ">
-                            <div>
-                                <a href="{{ route('question.create', $exam->id) }}"
-                                    class="middle none center rounded-lg bg-yellow-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg-underline hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Question</a>
-                            </div>
-                        </div>
+
                         <div class="mx-3 my-7 flex items-center">
                             <div class="mx-4">
                                 <h2 class=" font-bold text-2xl tracking-wide">{{ $exam->name }}</h2>
@@ -57,7 +51,7 @@
                                     @if (Auth::user()->id == \App\Models\User::find($exam->created_by)->id)
                                         You!
                                     @else
-                                        Instructor {{ \App\Models\User::find($exam->created_by)->name }}
+                                        Instr {{ \App\Models\User::find($exam->created_by)->name }}
                                         {{ \App\Models\User::find($exam->created_by)->father_name }}
                                 </div>
                                 @endif
@@ -118,25 +112,7 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="mx-40 my-4 flex items-center gap-2">
-                                        <div><a href="{{ route('question.edit', ['question_id' => $question->id, 'exam_id' => $exam->id]) }}"
-                                                class="middle none center rounded-lg bg-blue-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg-underline hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                                <i class="fa fa-edit"></i> Edit</a>
-                                        </div>
-                                        <div>
-                                            <form action="{{ route('question.destroy', $question->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
 
-                                                <button
-                                                    class="middle none center rounded-lg bg-red-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                                    data-ripple-light="true">
-                                                    <i class="fa fa-trash-alt"></i> Delete
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -148,42 +124,122 @@
 
                     </div>
 
-
                 </div>
+
             </div>
+
         </div>
-    </div>
+        @if (!$already_approved)
+            <div
+                class=" my-5 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
+                <x-auth-validation-errors class="px-2" :errors="$errors" />
 
-    <div
-        class="my-3 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
-        <h4 class="mb-2 mt-3 text-3xl font-medium leading-tight text-primary">
-            <div class="flex items-center gap-2">
-                <div>
-                    <x-gmdi-rate-review-o class="h-9 w-9" />
-                </div>
-                <div>Reviews</div>
-            </div>
-        </h4>
-        @foreach ($reviews as $review)
-            <!-- component -->
-            <div class=" text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
-                <img class="rounded-full h-8 w-8 mr-2 mt-1 "
-                    src="{{ asset(\App\Models\User::find(\App\Models\Evaluator::find($review->evaluator_id)->user_id)->avatar) }}" />
-                <div>
-                    <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-                        <div class="font-semibold text-sm leading-relaxed">
-                            {{ \App\Models\User::find(\App\Models\Evaluator::find($review->evaluator_id)->user_id)->name }}
-                            {{ \App\Models\User::find(\App\Models\Evaluator::find($review->evaluator_id)->user_id)->father_name }}
+                <form method="POST" action="{{ route('exam-review.approval', $exam->id) }}">
+                    @csrf
+                    @method('HEAD')
+                    <div class="flex items-center gap-5 py-5 pl-5">
+                        <!-- Review Body -->
+                        <div class="space-y-2 ">
+                            <x-form.input-with-icon-wrapper>
+                                <x-slot name="icon">
+                                    {{-- <x-tabler-id-badge-2 class="w-5 h-5" /> --}}
+                                </x-slot>
+
+                                <textarea
+                                    class="block w-mini py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1"
+                                    placeholder="{{ __('Enter your comment about the exam') }}" name="review" id="review" rows="4"
+                                    cols="50"></textarea>
+
+                            </x-form.input-with-icon-wrapper>
                         </div>
-                        <div class="text-normal leading-snug md:leading-normal">
-                            {{ $review->review }}
+
+                        {{-- approve/reject --}}
+                        
+                        <div class="flex">
+                            <div class="flex items-center mr-4">
+                                <input id="approval" type="radio" value="1" name="approval"
+                                    class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500 dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for=""
+                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Approve
+                                </label>
+                            </div>
+
+                            <div class="flex items-center mr-4">
+                                <input id="approval" type="radio" value="0" name="approval"
+                                    class="w-4 h-4 text-red-600 bg-gray-200 border-gray-400 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for=""
+                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Reject
+                                </label>
+                            </div>
                         </div>
+
+                        {{-- appove or reject and send comment --}}
+                        <div class="mt-5 mb-10 flex justify-end">
+                            <div class="flex items-center gap-2">
+                                <div>
+                                    <x-button>
+                                        {{ __('Send') }}
+                                    </x-button>
+                                </div>
+                                <div>
+                                    @if (session('status') === 'sent')
+                                        <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                                            class="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                            {{ __('Sent.') }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">
-                        {{ date('d-m-Y', strtotime($review->created_at)) }}</div>
-                </div>
+                </form>
             </div>
-        @endforeach
+        @endif
+
+        <div
+            class="my-3 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
+            <h4 class="mb-2 mt-3 text-3xl font-medium leading-tight text-primary">
+                <div class="flex items-center gap-2">
+                    <div>
+                        <x-gmdi-rate-review-o class="h-9 w-9" />
+                    </div>
+                    <div>Reviews</div>
+                </div>
+            </h4>
+            @foreach ($reviews as $review)
+                <!-- component -->
+                <div class=" text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                    <img class="rounded-full h-8 w-8 mr-2 mt-1 "
+                        src="{{ asset(\App\Models\User::find(\App\Models\Evaluator::find($review->evaluator_id)->user_id)->avatar) }}" />
+                    <div>
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                            <div class="font-semibold text-sm leading-relaxed">
+                                {{ \App\Models\User::find(\App\Models\Evaluator::find($review->evaluator_id)->user_id)->name }}
+                                {{ \App\Models\User::find(\App\Models\Evaluator::find($review->evaluator_id)->user_id)->father_name }}
+                            </div>
+                            <div class="text-normal leading-snug md:leading-normal">
+                                {{ $review->review }}
+                            </div>
+                        </div>
+                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">
+                            {{ date('d-m-Y', strtotime($review->created_at)) }}</div>
+                        @if (Auth::user()->evaluator->id == $review->evaluator_id)
+                            <div
+                                class="bg-white dark:bg-gray-700 border border-white dark:border-gray-500 rounded-full float-right -mt-8 mr-0.5 flex shadow items-center ">
+                                <span class="text-sm ml-1.5 pr-1.5 text-gray-500 dark:text-gray-300">
+
+                                    <a class="text-red-500 text-base"
+                                        href="{{ route('exam-review.destroy', $review->id) }}"><i
+                                            class="fa-solid fa-trash"></i></a>
+
+                                </span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 
 </x-app-layout>

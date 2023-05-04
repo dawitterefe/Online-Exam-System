@@ -67,6 +67,7 @@
         </x-sidebar.link>
     @endif
 
+
     {{-- TEACHER ONLY SIDEBAR LINKS --}}
     @if (Auth::user()->role->name == 'Teacher')
         {{-- dashboard --}}
@@ -78,7 +79,21 @@
         </x-sidebar.link>
         {{-- Exam Control --}}
         <x-sidebar.link title="Exam Hub" href="{{ route('exams.index') }}" :isActive="in_array(
-            request()->route()->getName(),['exams.index','exams.create','exams.show','exams.create','exams.delete', 'exams.trashed','exams.edit','question.create','question.edit'])">
+            request()
+                ->route()
+                ->getName(),
+            [
+                'exams.index',
+                'exams.create',
+                'exams.show',
+                'exams.create',
+                'exams.delete',
+                'exams.trashed',
+                'exams.edit',
+                'question.create',
+                'question.edit',
+            ],
+        )">
             <x-slot name="icon">
                 <x-majestic-checkbox-list-detail-solid class="w-6 h-6" />
             </x-slot>
@@ -86,23 +101,42 @@
     @endif
 
 
-    {{-- STUDENT ONLY SIDEBAR LINKS --}}
-    @if (Auth::user()->role->name == 'Student')
-        <x-sidebar.link title="Dashboard" href="{{ route('student.dashboard') }}" :isActive="request()->routeIs('student.dashboard')">
+
+    {{-- Evaluator ONLY SIDEBAR LINKS --}}
+    @if (Auth::user()->role->name == 'Evaluator')
+        {{-- dashboard --}}
+        <x-sidebar.link title="Dashboard" href="{{ route('evaluator.dashboard') }}" :isActive="request()->routeIs('evaluator.dashboard')">
             <x-slot name="icon">
-                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+                <x-fileicon-dashboard class="w-5 h-5" />
+            </x-slot>
+        </x-sidebar.link>
+
+        {{-- Exam Review --}}
+        <x-sidebar.link title="Exam Review" href="{{route('exam-review.index')}}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['exam-review.index','exam-review.show'],
+        )">
+            <x-slot name="icon">
+                <x-gmdi-rate-review-o class="w-6 h-6" />
             </x-slot>
         </x-sidebar.link>
     @endif
 
-    {{-- Evaluator ONLY SIDEBAR LINKS --}}
-    @if (Auth::user()->role->name == 'Evaluator')
-        <x-sidebar.link title="Dashboard" href="{{ route('evaluator.dashboard') }}" :isActive="request()->routeIs('evaluator.dashboard')">
+
+
+    {{-- STUDENT ONLY SIDEBAR LINKS --}}
+    @if (Auth::user()->role->name == 'Student')
+        {{-- dashboard --}}
+        <x-sidebar.link title="Dashboard" href="{{ route('student.dashboard') }}" :isActive="request()->routeIs('student.dashboard')">
             <x-slot name="icon">
-                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+                <x-fileicon-dashboard class="w-5 h-5" />
             </x-slot>
         </x-sidebar.link>
     @endif
+
+
 
 
 

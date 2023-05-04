@@ -34,4 +34,14 @@ class Exam extends Model
     {
         return $this->hasMany(Question::class);
     }
+    public function reviews() {
+        return $this->hasMany(ExamReview::class);
+    }
+
+    public function evaluators()
+    {
+        return $this->belongsToMany(Evaluator::class,'exam_reviews');
+    }
 }
+
+

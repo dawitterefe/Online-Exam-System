@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Exam;
+use App\Models\ExamReview;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,10 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $exams = Exam::latest()->paginate(4);
+        $teacher = auth()->user()->teacher;
+        $courses = $teacher->courses;
+        $exams = Exam::whereIn('course_id', $courses->pluck('id'))->latest()->paginate(3);
+        // $exams = Exam::latest()->paginate(4);
         return view('teacher.exams', compact('exams'));
     }
 
@@ -71,8 +75,9 @@ class ExamController extends Controller
     public function show(string $id)
     {
         $exam = Exam::findOrFail($id);
-        $questions =  Question::where('exam_id',$exam->id)->latest()->paginate(5);
-        return view('teacher.show-exam', compact('exam','questions'));
+        $reviews = ExamReview::where('exam_id', $exam->id)->get();
+        $questions =  Question::where('exam_id',$exam->id)->latest()->paginate(4);
+        return view('teacher.show-exam', compact('exam','questions','reviews'));
     }
 
     /**
