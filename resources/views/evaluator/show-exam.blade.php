@@ -240,7 +240,8 @@
 
         <div
             class="my-3 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
-            <h4 class="mb-2 mt-3 text-3xl font-medium leading-tight text-primary">
+
+            <h4 class="mb-2 mt-3 -ml-10 text-3xl font-medium leading-tight text-primary">
                 <div class="flex items-center gap-2">
                     <div>
                         <x-gmdi-rate-review-o class="h-9 w-9" />
@@ -248,38 +249,42 @@
                     <div>Reviews</div>
                 </div>
             </h4>
+
             @foreach ($reviews as $review)
             <!-- component -->
-            <div class=" text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
-                <img class="rounded-full h-8 w-8 mr-2 mt-1 "
-                    src="{{asset(\App\Models\User::find($review->user_id)->avatar)}}" />
-                <div>
-                    <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-                        <div class="font-semibold text-sm leading-relaxed">
-                            {{\App\Models\User::find($review->user_id)->name}}
-                            {{\App\Models\User::find($review->user_id)->father_name}}
+            <div class=" flex gap-1">
+                <div class="mt-2 mb-1">
+                    <img class="h-8 w-8 rounded-full mr-2 mt-1 "
+                        src="{{asset(\App\Models\User::find($review->user_id)->avatar)}}" />
+                </div>
+                <div class=" text-black dark:text-gray-200 py-4 pr-4  antialiased flex max-w-lg">
+                    <div>
+                        <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                            <div class="font-semibold text-sm leading-relaxed text-cyan-700 dark:text-cyan-300">
+                                {{\App\Models\User::find($review->user_id)->name}}
+                                {{\App\Models\User::find($review->user_id)->father_name}}
+                            </div>
+                            <div class="text-normal leading-snug md:leading-normal">
+                                {{$review->pivot->review}}
+                            </div>
                         </div>
-                        <div class="text-normal leading-snug md:leading-normal">
-                            {{$review->pivot->review}}
+                        <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">
+                            {{ date('d-m-Y', strtotime($review->pivot->created_at)) }}</div>
+
+                        @if (Auth::user()->evaluator->id == $review->pivot->evaluator_id)
+                        <div
+                            class="bg-white dark:bg-gray-700 border border-white dark:border-gray-500 rounded-full float-right -mt-8 mr-0.5 flex shadow items-center ">
+                            <span class="text-sm ml-1.5 pr-1.5 text-gray-500 dark:text-gray-300">
+                                <a class="text-red-500 text-base"
+                                    href="{{ route('exam-review.destroy',$review->pivot->id) }}"><i
+                                        class="fa-solid fa-trash"></i></a>
+                            </span>
                         </div>
+                        @endif
                     </div>
-                    <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">
-                        {{ date('d-m-Y', strtotime($review->pivot->created_at)) }}</div>
-
-                    @if (Auth::user()->evaluator->id == $review->pivot->evaluator_id)
-                    <div
-                        class="bg-white dark:bg-gray-700 border border-white dark:border-gray-500 rounded-full float-right -mt-8 mr-0.5 flex shadow items-center ">
-                        <span class="text-sm ml-1.5 pr-1.5 text-gray-500 dark:text-gray-300">
-
-                            <a class="text-red-500 text-base"
-                                href="{{ route('exam-review.destroy',$review->pivot->id) }}"><i
-                                    class="fa-solid fa-trash"></i></a>
-
-                        </span>
-                    </div>
-                    @endif
                 </div>
             </div>
+
             @endforeach
         </div>
     </div>

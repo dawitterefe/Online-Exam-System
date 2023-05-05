@@ -29,7 +29,7 @@ class QuestionController extends Controller
             'option_2' => 'required',
             'option_3' => 'nullable',
             'option_4' => 'nullable',
-            'answer' => 'required',
+            'answer' => 'required|integer',
             'points' => 'nullable|integer',
         ]);
 
@@ -85,7 +85,7 @@ class QuestionController extends Controller
     {
         $question = Question::findOrFail($id);
         $question->delete();
-        
+
         return redirect()->back();
     }
 }
