@@ -25,11 +25,12 @@ class ExamEvaluationController extends Controller
     public function show(string $id)
     {
         $exam = Exam::findOrFail($id);
-        $reviews = ExamReview::where('exam_id', $exam->id)->get();
+        $reviews = $exam->evaluations()->where('exam_id', $exam->id)->get();
+
+
         $evaluator_id = Auth::user()->evaluator->id;
-        $already_approved = $exam->evaluators()->wherePivot('evaluator_id', $evaluator_id)->exists();
-        // $already_approved = ExamReview::where('evaluator_id', $evaluator_id)->where('exam_id', $exam->id)->first();
-        $questions =  Question::where('exam_id', $exam->id)->latest()->paginate(5);
+        $already_approved = $exam->evaluations()->wherePivot('evaluator_id', $evaluator_id)->exists();
+        $questions =  Question::where('exam_id', $exam->id)->latest()->paginate(4);
         return view('evaluator.show-exam', compact('exam', 'questions', 'reviews', 'already_approved'));
     }
 
@@ -52,7 +53,7 @@ class ExamEvaluationController extends Controller
 
         if ($request->approval == 1) {
 
-            $exam->evaluators()->updateExistingPivot($evaluator, ['approved' => true]);
+            $exam->evaluations()->updateExistingPivot($evaluator, ['approved' => true]);
         }
 
         return redirect()->back()->with('status', 'sent');
@@ -63,6 +64,6 @@ class ExamEvaluationController extends Controller
         $review = ExamReview::findOrFail($id);
         $review->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('status', 'deleted');
     }
 }

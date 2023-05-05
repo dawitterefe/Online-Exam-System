@@ -34,13 +34,10 @@ class Exam extends Model
     {
         return $this->hasMany(Question::class);
     }
-    public function reviews() {
-        return $this->hasMany(ExamReview::class);
-    }
 
-    public function evaluators()
+    public function evaluations()
     {
-        return $this->belongsToMany(Evaluator::class,'exam_reviews');
+        return $this->belongsToMany(Evaluator::class,'exam_reviews',)->withPivot(['id','review', 'approved','created_at']);
     }
 }
 

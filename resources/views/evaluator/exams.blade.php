@@ -97,13 +97,13 @@
                                             {{ $exam->duration }} Min</td>
                                         <td
                                             class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $exam->evaluators()->wherePivot('approved', true)->count()}} Evaluators</td>
+                                            {{ $exam->evaluations()->wherePivot('approved', true)->count()}} Evaluators</td>
 
                                         <td
                                             class="py-3 pr-2 pl-1 pr-6 text-sm font-medium text-right whitespace-nowrap">
                                             <a href="{{ route('exam-review.show', $exam->id) }}"
                                                 class="middle none center rounded-lg bg-green-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                                <i class="fa fa-exam"></i> Show</a>
+                                                <i class="fa fa-eye" aria-hidden="true"></i> Show</a>
                                         </td>
 
                                     </tr>

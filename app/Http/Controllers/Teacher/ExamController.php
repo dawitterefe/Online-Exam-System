@@ -75,9 +75,9 @@ class ExamController extends Controller
     public function show(string $id)
     {
         $exam = Exam::findOrFail($id);
-        $reviews = ExamReview::where('exam_id', $exam->id)->get();
-        $questions =  Question::where('exam_id',$exam->id)->latest()->paginate(4);
-        return view('teacher.show-exam', compact('exam','questions','reviews'));
+        $reviews = $exam->evaluations()->where('exam_id', $exam->id)->get();
+        $questions =  Question::where('exam_id', $exam->id)->latest()->paginate(4);
+        return view('teacher.show-exam', compact('exam', 'questions', 'reviews'));
     }
 
     /**
@@ -99,9 +99,9 @@ class ExamController extends Controller
         $exam = Exam::findOrfail($id);
 
         $request->validate([
-            'exam_name' => [ 'string', 'max:255'],
+            'exam_name' => ['string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'course' => [ 'exists:courses,id'],
+            'course' => ['exists:courses,id'],
             'total_questions' => ['integer', 'min:1'],
             'passing_score' => ['integer', 'min:1'],
             'duration' => ['integer', 'min:1'],

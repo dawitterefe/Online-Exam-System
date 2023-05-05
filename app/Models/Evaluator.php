@@ -25,9 +25,5 @@ class Evaluator extends Model
     {
         return $this->belongsToMany(Course::class, 'evaluator_course');
     }
-    
-    public function exams()
-    {
-        return $this->belongsToMany(Exam::class,'exam_reviews');
-    }
+
 }
