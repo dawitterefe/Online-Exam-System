@@ -7,6 +7,7 @@ import PerfectScrollbar from 'perfect-scrollbar'
 import flatpickr from "flatpickr";
 window.flatpickr = flatpickr;
 
+
 window.PerfectScrollbar = PerfectScrollbar
 
 document.addEventListener('DOMContentLoaded', function () {

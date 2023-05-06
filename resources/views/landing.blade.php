@@ -52,8 +52,7 @@
                                     <x-application-logo aria-hidden="true" />
                                 </div>
 
-                                <div
-                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline
+                                <div class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline
                                 focus:outline-2 focus:rounded-sm focus:outline-cyan-500">
 
                                     DBU Online Exmination System
@@ -67,41 +66,44 @@
                     <div class="flex items-center justify-end gap-3">
                         <div>
                             @if (Route::has('login'))
-                                <div class="pr-0">
-                                    @auth
+                            <div class="pr-0">
+                                @auth
 
-                                        @if (Auth::user()->role->name == 'Admin')
-                                        <a href="{{ url('/admin') }}"
-                                        class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
-                                        Dashboard</a>
-                                        @endif
-                                        @if (Auth::user()->role->name == 'Teacher')
-                                        <a href="{{ url('/teacher') }}"
-                                        class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
-                                        Dashboard</a>
-                                        @endif
-                                        @if (Auth::user()->role->name == 'Evaluator')
-                                        <a href="{{ url('/evaluator') }}"
-                                        class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
-                                        Dashboard</a>
-                                        @endif
-                                        @if (Auth::user()->role->name == 'Student')
-                                        <a href="{{ url('/student') }}"
-                                        class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
-                                        Dashboard</a>
-                                        @endif
+                                @if (Auth::user()->role->name == 'Admin')
+                                <a href="{{ url('/admin') }}"
+                                    class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                                    Dashboard</a>
+                                @endif
+                                @if (Auth::user()->role->name == 'Teacher')
+                                <a href="{{ url('/teacher') }}"
+                                    class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                                    Dashboard</a>
+                                @endif
+                                @if (Auth::user()->role->name == 'Evaluator')
+                                <a href="{{ url('/evaluator') }}"
+                                    class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                                    Dashboard</a>
+                                @endif
+                                @if (Auth::user()->role->name == 'Student')
+                                <a href="{{ url('/student') }}"
+                                    class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                                    Dashboard</a>
+                                @endif
 
-                                    @else
-                                        <a href="{{ route('login') }}"
-                                            class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Log
-                                            in</a>
+                                @else
+                                <a href="{{ route('login') }}"
+                                    class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Log
+                                    in</a>
 
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}"
-                                                class="ml-4 font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Register</a>
-                                        @endif
-                                    @endauth
-                                </div>
+                                @if (\App\Models\User::count() == 0)
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}"
+                                            class="ml-4 font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Register</a>
+                                    @endif
+                                @endif
+
+                                @endauth
+                            </div>
                             @endif
                         </div>
 

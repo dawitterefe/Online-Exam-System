@@ -71,7 +71,7 @@
                         <div class=" bg-slate-200 shadow sm:rounded-lg dark:bg-slate-700">
                             <div class="mx-2 my-2 p-2">
                                 <h5 class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">
-                                    {{ $loop->iteration }}. {{ $question->question }} </h5>
+                                   {{ ($questions->currentPage() - 1) * $questions->perPage() + $loop->iteration }}. {{ $question->question }} </h5>
 
                                 <div class="my-3 mx-12 ">
                                     {{-- choice one --}}
