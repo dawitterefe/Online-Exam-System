@@ -59,6 +59,7 @@ class ExamEvaluationController extends Controller
         return redirect()->back()->with('status', 'sent');
     }
 
+
     public function destroy(string $id)
     {
         $review = ExamReview::findOrFail($id);

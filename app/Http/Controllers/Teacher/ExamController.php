@@ -123,6 +123,28 @@ class ExamController extends Controller
 
         return Redirect::route('exams.edit', $exam->id)->with('status', 'profile-updated');
     }
+    /**
+     * activate the specified exam.
+     */
+    public function activate(string $id)
+    {
+        $exam = Exam::findOrFail($id);
+        $exam->is_active = true;
+        $exam->save();
+
+        return redirect()->back()->with('status', 'activated');
+    }
+    /**
+     * deactivate the specified exam.
+     */
+    public function deactivate(string $id)
+    {
+        $exam = Exam::findOrFail($id);
+        $exam->is_active = false;
+        $exam->save();
+
+        return redirect()->back()->with('status', 'deactivated');
+    }
 
     /**
      * Remove the specified resource from storage.

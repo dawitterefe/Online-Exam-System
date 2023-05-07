@@ -17,7 +17,7 @@
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
         </div>
 
-        {{-- Notifucations --}}
+        {{-- Notifications --}}
         <div class="mt-3 mb-1">
             @if (session('status') === 'sent')
             <div class="flex items-center gap-2">

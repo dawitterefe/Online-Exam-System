@@ -7,6 +7,7 @@ use App\Http\Controllers\Evaluator\ExamEvaluationController;
 use App\Http\Controllers\Teacher\ExamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Student\ExamController as StudentExamController;
 use App\Http\Controllers\teacher\QuestionController;
 
 /*
@@ -75,15 +76,18 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::delete('/question/{id}/delete', [QuestionController::class, 'destroy'])->name('question.destroy');
     Route::get('/question/{question_id}/{exam_id}/edit', [QuestionController::class, 'edit'])->name('question.edit');
     Route::put('/question/{id}/update', [QuestionController::class, 'update'])->name('question.update');
+
+    Route::get('/exam/{id}/activate', [ExamController::class, 'activate'])->name('exam.activate');
+    Route::get('/exam/{id}/deactivate', [ExamController::class, 'deactivate'])->name('exam.deactivate');
 });
 
 
 // EVALUATOR ROUTES
 Route::middleware(['auth', 'role:evaluator'])->group(function () {
     Route::view('/evaluator', 'evaluator.dashboard')->name('evaluator.dashboard');
-    Route::get('/exam-review',[ExamEvaluationController::class, 'index'])->name('exam-review.index');
-    Route::get('/exam-review/{id}',[ExamEvaluationController::class, 'show'])->name('exam-review.show');
-    Route::get('/exam-approval/{id}',[ExamEvaluationController::class,'setApprovalStatus'])->name('exam-review.approval');
+    Route::get('/exam-review', [ExamEvaluationController::class, 'index'])->name('exam-review.index');
+    Route::get('/exam-review/{id}', [ExamEvaluationController::class, 'show'])->name('exam-review.show');
+    Route::get('/exam-approval/{id}', [ExamEvaluationController::class, 'setApprovalStatus'])->name('exam-review.approval');
     Route::get('/exam-review/{id}/destroy', [ExamEvaluationController::class, 'destroy'])->name('exam-review.destroy');
 });
 
@@ -92,6 +96,7 @@ Route::middleware(['auth', 'role:evaluator'])->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::view('/student', 'student.dashboard')->name('student.dashboard');
+    Route::get('/student-exam', [StudentExamController::class, 'index'])->name('student.exams');
 });
 
 
@@ -100,43 +105,5 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// useless routes
-// Just to demo sidebar dropdown links active states.
-Route::get('/buttons/text', function () {
-    return view('buttons-showcase.text');
-})->middleware(['auth'])->name('buttons.text');
-
-Route::get('/buttons/icon', function () {
-    return view('buttons-showcase.icon');
-})->middleware(['auth'])->name('buttons.icon');
-
-Route::get('/buttons/text-icon', function () {
-    return view('buttons-showcase.text-icon');
-})->middleware(['auth'])->name('buttons.text-icon');
 
 require __DIR__ . '/auth.php';

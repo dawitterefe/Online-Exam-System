@@ -15,6 +15,37 @@
                 class="middle none center rounded-lg bg-cyan-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
         </div>
+        {{-- Notifications --}}
+        <div class="mt-3 mb-1">
+            @if (session('status') === 'activated')
+            <div class="flex items-center gap-2">
+                <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
+                    <x-gmdi-notifications-active-o class="w-5 h-5 text-green-600 dark:text-green-400" />
+                </div>
+                <div>
+                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+                        class="text-sm font-bold text-green-600 dark:text-green-400">
+                        {{ __('The Exam is now online') }}
+                    </p>
+                </div>
+            </div>
+            @endif
+        </div>
+        <div class="mt-3 mb-1">
+            @if (session('status') === 'deactivated')
+            <div class="flex items-center gap-2">
+                <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
+                    <x-gmdi-notifications-active-o class="w-5 h-5 text-red-600 dark:text-red-400" />
+                </div>
+                <div>
+                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+                        class="text-sm font-bold text-red-600 dark:text-red-400">
+                        {{ __('The Exam is now offline') }}
+                    </p>
+                </div>
+            </div>
+            @endif
+        </div>
 
     </x-slot>
     <!-- component -->
@@ -23,13 +54,62 @@
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800">
                     <div class="overflow-hidden ">
-                        <div class="flex  mb-5 mt-3 mr-6 justify-end gap-2 ... ">
-                            <div>
-                                <a href="{{ route('question.create', $exam->id) }}"
-                                    class="middle none center rounded-lg bg-yellow-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg-underline hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Question</a>
+                        <div class="flex justify-between items-center mt-3">
+                            <div class="flex ml-6 mb-5 mt-3  justify-start gap-2 ... ">
+                                @if ($exam->is_active)
+                                <div class="flex items-center gap-2">
+                                    <div>
+                                        <x-bi-circle-fill class="h-4 w-4 text-green-500 dark:text-green-500" />
+                                    </div>
+                                    <div>ONLINE</div>
+                                </div>
+
+                                @else
+                                <div class="flex items-center gap-2">
+                                    <div>
+                                        <x-bi-circle-fill class="h-4 w-4 text-red-500 dark:text-red-500" />
+
+                                    </div>
+                                    <div>OFFLINE</div>
+                                </div>
+
+                                @endif
+
+                            </div>
+
+                            <div class="flex  mb-5 mt-3 mr-6 justify-end gap-2 ... ">
+                                <div>
+                                    <a href="{{ route('question.create', $exam->id) }}"
+                                        class="middle none center rounded-lg bg-yellow-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg-underline hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Question</a>
+                                </div>
+                                @if ($exam->evaluations()->wherePivot('approved', true)->count() >= 1 &&
+                                $exam->is_active == false)
+                                <div>
+                                    <a href="{{ route('exam.activate', $exam->id) }}"
+                                        class="middle none center rounded-lg bg-green-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Activate</a>
+                                </div>
+                                @elseif ($exam->evaluations()->wherePivot('approved', true)->count() >= 1 &&
+                                $exam->is_active == true)
+                                <div>
+                                    <a href="{{ route('exam.deactivate', $exam->id) }}"
+                                        class="middle none center rounded-lg bg-red-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg-underline hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Deactivate</a>
+                                </div>
+                                @else
+                                <div>
+                                    <a href=""
+                                        class="cursor-not-allowed middle none center rounded-lg bg-gray-400 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg-underline hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Activate</a>
+                                </div>
+                                @endif
+
+
                             </div>
                         </div>
+
+
                         <div class="mx-3 my-7 flex items-center">
                             <div class="mx-4">
                                 <h2 class=" font-bold text-2xl tracking-wide">{{ $exam->name }}</h2>
@@ -71,7 +151,8 @@
                         <div class=" bg-slate-200 shadow sm:rounded-lg dark:bg-slate-700">
                             <div class="mx-2 my-2 p-2">
                                 <h5 class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">
-                                   {{ ($questions->currentPage() - 1) * $questions->perPage() + $loop->iteration }}. {{ $question->question }} </h5>
+                                    {{ ($questions->currentPage() - 1) * $questions->perPage() + $loop->iteration }}. {{
+                                    $question->question }} </h5>
 
                                 <div class="my-3 mx-12 ">
                                     {{-- choice one --}}

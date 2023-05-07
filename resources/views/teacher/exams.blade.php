@@ -82,8 +82,6 @@
                                         <span class="sr-only">Delete</span>
                                     </th>
 
-
-
                                 </tr>
                             </thead>
 
