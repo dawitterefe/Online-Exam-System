@@ -103,7 +103,7 @@
                                     </td>
 
                                     <td class="py-3 pr-2 pl-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <a href=""
+                                        <a href="{{route('student.show', $exam->id)}}"
                                             class="middle none center rounded-lg bg-cyan-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                             <i class="fa fa-info-circle" aria-hidden="true"></i> More</a>
                                     </td>
@@ -112,7 +112,7 @@
 
                                         @if ($exam->is_active)
 
-                                        <a href=""
+                                        <a href="{{route('student.exam', $exam->id)}}"
                                             class="middle none center rounded-lg bg-green-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                             <i class="fa fa-hourglass-start" aria-hidden="true"></i> Start</a>
 

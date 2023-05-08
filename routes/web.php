@@ -96,7 +96,9 @@ Route::middleware(['auth', 'role:evaluator'])->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::view('/student', 'student.dashboard')->name('student.dashboard');
-    Route::get('/student-exam', [StudentExamController::class, 'index'])->name('student.exams');
+    Route::get('/student-exams', [StudentExamController::class, 'index'])->name('student.exams');
+    Route::get('/student-exam/{id}/info', [StudentExamController::class, 'showExamInfo'])->name('student.show');
+    Route::get('/student-exam/{id}', [StudentExamController::class, 'showExam'])->name('student.exam');
 });
 
 

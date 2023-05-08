@@ -138,9 +138,13 @@
             <x-fileicon-dashboard class="w-5 h-5" />
         </x-slot>
     </x-sidebar.link>
-
     {{-- Exam --}}
-    <x-sidebar.link title="My Exam" href="{{route('student.exams')}}" :isActive="request()->routeIs('student.exams')">
+    <x-sidebar.link title="My Exam" href="{{ route('student.exams') }}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['student.exams', 'student.show', 'student.exam'],
+        )">
         <x-slot name="icon">
             <x-majestic-checkbox-list-detail-solid class="w-6 h-6" />
         </x-slot>
