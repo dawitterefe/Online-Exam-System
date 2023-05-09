@@ -99,6 +99,8 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student-exams', [StudentExamController::class, 'index'])->name('student.exams');
     Route::get('/student-exam/{id}/info', [StudentExamController::class, 'showExamInfo'])->name('student.show');
     Route::get('/student-exam/{id}', [StudentExamController::class, 'showExam'])->name('student.exam');
+    Route::post('/student-submit-exam/{id}', [StudentExamController::class, 'submitExam'])->name('student.submit-exam');
+    Route::get('/student-exam-results', [StudentExamController::class, 'showResults'])->name('student.exam-results');
 });
 
 

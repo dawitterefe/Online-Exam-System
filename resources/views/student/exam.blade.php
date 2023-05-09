@@ -69,81 +69,83 @@
                         </div>
                     </div>
 
+
                     <div class="mx-10 my-5 ">
-                        @foreach ($questions as $question)
-                        <div class=" bg-slate-200 shadow sm:rounded-lg dark:bg-slate-700">
-                            <div class="mx-2 my-2 p-2">
-                                <h5 class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">
-                                    {{ ($questions->currentPage() - 1) * $questions->perPage() + $loop->iteration }}. {{
-                                    $question->question }} </h5>
+                        <form action="{{route('student.submit-exam',$exam->id)}}" method="POST">
+                            @csrf
+                            @foreach ($questions as $question)
+                            <div class=" bg-slate-200 shadow sm:rounded-lg dark:bg-slate-700">
+                                <div class="mx-2 my-2 p-2">
+                                    <h5 class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">
+                                        {{$loop->iteration}}. {{$question->question}} </h5>
 
-                                <div class="my-3 mx-12 ">
-                                    {{-- choice one --}}
-                                    <div class="flex items-center mr-4">
-                                        <input id="{{ $question->id }}" name="{{ $question->id }}" type="radio"
-                                            value="1"
-                                        data-question-id="{{ $question->id }}"
-                                        class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500
+                                    <div class="my-3 mx-12 ">
+                                        {{-- choice one --}}
+                                        <div class="flex items-center mr-4">
+                                            <input id="{{ $question->id}}" name="{{$question->id}}" type="radio"
+                                                value="1" class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500
                                         dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
                                         dark:border-gray-600">
-                                        <label for=""
-                                            class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">{{
-                                            $question->option_1 }}
-                                        </label>
-                                    </div>
-                                    {{-- choice two --}}
-                                    <div class="flex items-center mr-4">
-                                        <input id="{{ $question->id }}" name="{{ $question->id }} " type="radio"
-                                            value="2"
-                                        data-question-id="{{ $question->id }}"
-                                        id="2"
-                                        class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500
+                                            <label for=""
+                                                class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">{{
+                                                $question->option_1 }}
+                                            </label>
+                                        </div>
+                                        {{-- choice two --}}
+                                        <div class="flex items-center mr-4">
+                                            <input id="{{$question->id}}" name="{{$question->id}}" type="radio"
+                                                value="2" id="2" class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500
                                         dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
                                         dark:border-gray-600">
-                                        <label for=""
-                                            class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">{{
-                                            $question->option_2 }}
-                                        </label>
-                                    </div>
-                                    @if (isset($question->option_3) && isset($question->option_4))
-                                    {{-- choice three --}}
-                                    <div class="flex items-center mr-4">
-                                        <input id="{{ $question->id }}" name="{{ $question->id }}" type="radio"
-                                            value="3"
-                                        data-question-id="{{ $question->id }}"
-
-                                        class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500
+                                            <label for=""
+                                                class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">{{
+                                                $question->option_2 }}
+                                            </label>
+                                        </div>
+                                        @if (isset($question->option_3) && isset($question->option_4))
+                                        {{-- choice three --}}
+                                        <div class="flex items-center mr-4">
+                                            <input id="{{$question->id}}" name="{{$question->id}}" type="radio"
+                                                value="3" class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500
                                         dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
                                         dark:border-gray-600">
-                                        <label for=""
-                                            class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">{{
-                                            $question->option_3 }}
-                                        </label>
+                                            <label for=""
+                                                class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">{{
+                                                $question->option_3 }}
+                                            </label>
+                                        </div>
+                                        {{-- choice four --}}
+                                        <div class="flex items-center mr-4">
+                                            <input id="{{$question->id}}" name="{{$question->id}}" type="radio"
+                                                value="4" class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500
+                                            dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2
+                                            dark:bg-gray-700
+                                            dark:border-gray-600">
+                                            <label for=""
+                                                class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">
+                                                {{$question->option_4}}
+                                            </label>
+                                        </div>
+                                        @endif
                                     </div>
-                                    {{-- choice four --}}
-                                    <div class="flex items-center mr-4">
-                                        <input id="{{ $question->id }}" name="{{ $question->id }}" type="radio"
-                                            value="4" {{ old($question->id) === "4" ? 'checked' : '' }}
-                                        data-question-id="{{ $question->id }}"
-
-                                        class="w-4 h-4 text-cyan-600 bg-gray-200 border-gray-400 focus:ring-cyan-500
-                                        dark:focus:ring-cyan-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                                        dark:border-gray-600">
-                                        <label for=""
-                                            class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">{{
-                                            $question->option_4 }}
-                                        </label>
-                                    </div>
-                                    @endif
                                 </div>
                             </div>
-                        </div>
-                        @endforeach
+                            @endforeach
+
+                            <div class="flex justify-end w-13 h-9 mt-3 ">
+                                <x-button class="justify-center w-half gap-2">
+                                    <x-fas-hourglass-end class="w-4 h-4" />
+                                    <span>{{ __('Submit') }}</span>
+                                </x-button>
+                            </div>
+                        </form>
+
+
                     </div>
 
                     <div class="px-4 py-2 bg-gray-300 dark:bg-gray-700 ">
 
-                        {{ $questions->links() }}
+                        {{-- {{ $questions->links() }} --}}
 
                     </div>
 

@@ -47,11 +47,23 @@
                     </p>
                 </div>
             </div>
-
             @endif
         </div>
-
-
+        <div class="mt-3 mb-1">
+            @if (session('status') === 'no_questions')
+            <div class="flex items-center gap-2">
+                <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
+                    <x-gmdi-notifications-active-o class="w-5 h-5 text-red-600 dark:text-red-400" />
+                </div>
+                <div>
+                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+                        class="text-sm font-bold text-red-600 dark:text-red-400">
+                        {{ __('The exam has no question, You can not approve exams with no question. ') }}
+                    </p>
+                </div>
+            </div>
+            @endif
+        </div>
 
     </x-slot>
     <!-- component -->
@@ -102,7 +114,8 @@
                         <div class=" bg-slate-200 shadow sm:rounded-lg dark:bg-slate-700">
                             <div class="mx-2 my-2 p-2">
                                 <h5 class="ml-2 text-base font-medium text-gray-900 dark:text-gray-100">
-                                   {{ ($questions->currentPage() - 1) * $questions->perPage() + $loop->iteration }}. {{ $question->question }} </h5>
+                                    {{ ($questions->currentPage() - 1) * $questions->perPage() + $loop->iteration }}. {{
+                                    $question->question }} </h5>
 
                                 <div class="my-3 mx-12 ">
                                     {{-- choice one --}}
@@ -176,9 +189,15 @@
                 </div>
 
             </div>
-
         </div>
+
         @if (!$already_approved)
+        <div class="flex justify-start items-center gap-2 mb-2 mt-5 text-3xl font-medium leading-tight text-primary">
+            <div>
+                <x-gmdi-rate-review-o class="h-9 w-9" />
+            </div>
+            <div>Add your evaluation</div>
+        </div>
         <div
             class=" my-5 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
             <x-auth-validation-errors class="px-2" :errors="$errors" />
@@ -222,7 +241,7 @@
                     </div>
 
                     {{-- appove or reject and send comment --}}
-                    <div class="mt-5 mb-10 flex justify-end">
+                    <div class="mt-5 my-5 flex justify-end">
                         <div class="flex items-center gap-2">
                             <div>
                                 <x-button>
@@ -237,22 +256,18 @@
             </form>
         </div>
         @endif
-
+        <div class="flex justify-start items-center gap-2 mb-2 mt-5 text-3xl font-medium leading-tight text-primary">
+            <div>
+                <x-gmdi-rate-review-o class="h-9 w-9" />
+            </div>
+            <div>Evaluations</div>
+        </div>
         <div
             class="my-3 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
 
-            <h4 class="mb-2 mt-3 -ml-10 text-3xl font-medium leading-tight text-primary">
-                <div class="flex items-center gap-2">
-                    <div>
-                        <x-gmdi-rate-review-o class="h-9 w-9" />
-                    </div>
-                    <div>Reviews</div>
-                </div>
-            </h4>
-
             @foreach ($reviews as $review)
             <!-- component -->
-            <div class=" flex gap-1">
+            <div class=" flex gap-1 my-5">
                 <div class="mt-2 mb-1">
                     <img class="h-8 w-8 rounded-full mr-2 mt-1 "
                         src="{{asset(\App\Models\User::find($review->user_id)->avatar)}}" />

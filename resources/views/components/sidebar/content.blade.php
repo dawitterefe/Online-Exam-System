@@ -149,6 +149,18 @@
             <x-majestic-checkbox-list-detail-solid class="w-6 h-6" />
         </x-slot>
     </x-sidebar.link>
+
+    {{-- Result --}}
+    <x-sidebar.link title="My Result" href="{{ route('student.exam-results') }}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['student.exam-results',],
+        )">
+        <x-slot name="icon">
+            <x-fas-award class="w-6 h-6"  />
+        </x-slot>
+    </x-sidebar.link>
     @endif
 
 

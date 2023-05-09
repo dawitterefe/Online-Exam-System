@@ -45,18 +45,21 @@ class ExamEvaluationController extends Controller
             'approval' => 'required',
         ]);
 
-        ExamReview::create([
-            'exam_id' => $exam->id,
-            'evaluator_id' => $evaluator,
-            'review' => $request->review,
-        ]);
-
-        if ($request->approval == 1) {
-
-            $exam->evaluations()->updateExistingPivot($evaluator, ['approved' => true]);
+        if ($exam->questions->first() !== null) {
+            ExamReview::create([
+                'exam_id' => $exam->id,
+                'evaluator_id' => $evaluator,
+                'review' => $request->review,
+            ]);
         }
 
-        return redirect()->back()->with('status', 'sent');
+        if ($request->approval == 1 && $exam->questions->first() !== null) {
+
+            $exam->evaluations()->updateExistingPivot($evaluator, ['approved' => true]);
+            return redirect()->back()->with('status', 'sent');
+        } else {
+            return redirect()->back()->with('status', 'no_questions');
+        }
     }
 
 

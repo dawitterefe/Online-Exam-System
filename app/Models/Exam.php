@@ -37,8 +37,11 @@ class Exam extends Model
 
     public function evaluations()
     {
-        return $this->belongsToMany(Evaluator::class,'exam_reviews',)->withPivot(['id','review', 'approved','created_at']);
+        return $this->belongsToMany(Evaluator::class, 'exam_reviews',)->withPivot(['id', 'review', 'approved', 'created_at']);
+    }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
     }
 }
-
-

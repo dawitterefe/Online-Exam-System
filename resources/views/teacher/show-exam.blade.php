@@ -100,7 +100,7 @@
                                 @else
                                 <div>
                                     <a href=""
-                                        class="cursor-not-allowed middle none center rounded-lg bg-gray-400 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg-underline hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                        class="pointer-events-none middle none center rounded-lg bg-gray-400 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg-underline hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i> Activate</a>
                                 </div>
                                 @endif
@@ -245,22 +245,18 @@
             </div>
         </div>
     </div>
-
+    <div class="flex justify-start items-center gap-2 mb-2 mt-5 text-3xl font-medium leading-tight text-primary">
+        <div>
+            <x-gmdi-rate-review-o class="h-9 w-9" />
+        </div>
+        <div>Evaluations</div>
+    </div>
     <div
         class="my-3 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
 
-        <h4 class="mb-2 mt-3 -ml-10 text-3xl font-medium leading-tight text-primary">
-            <div class="flex items-center gap-2">
-                <div>
-                    <x-gmdi-rate-review-o class="h-9 w-9" />
-                </div>
-                <div>Reviews</div>
-            </div>
-        </h4>
-
         @foreach ($reviews as $review)
         <!-- component -->
-        <div class=" flex gap-1">
+        <div class=" flex gap-1 my-5">
             <div class="mt-2 mb-1">
                 <img class="h-8 w-8 rounded-full mr-2 mt-1 "
                     src="{{asset(\App\Models\User::find($review->user_id)->avatar)}}" />

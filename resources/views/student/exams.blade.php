@@ -12,10 +12,26 @@
                     {{ __('My Exam') }}
                 </h2>
             </div>
-
         </div>
-
     </x-slot>
+
+    {{-- Notifications --}}
+    <div class="mt-3 mb-1">
+        @if (session('status') === 'already_taken')
+        <div class="flex items-center gap-2">
+            <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
+                <x-gmdi-notifications-active-o class="w-5 h-5 text-green-600 dark:text-green-400" />
+            </div>
+            <div>
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+                    class="text-sm font-bold text-green-600 dark:text-green-400">
+                    {{ __('You have alaready taken the exam') }}
+                </p>
+            </div>
+        </div>
+        @endif
+    </div>
+
 
     <!-- component -->
     <div class="max-w-5xl mt-3 mx-auto">
@@ -95,9 +111,9 @@
                                         class="py-2 pl-3 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
 
                                         @if ($exam->is_active)
-                                            <x-bi-circle-fill class="h-3 w-3 text-green-500 dark:text-green-500" />
+                                        <x-bi-circle-fill class="h-3 w-3 text-green-500 dark:text-green-500" />
                                         @else
-                                            <x-bi-circle-fill class="h-3 w-3 text-red-500 dark:text-red-500" />
+                                        <x-bi-circle-fill class="h-3 w-3 text-red-500 dark:text-red-500" />
                                         @endif
 
                                     </td>
@@ -110,7 +126,7 @@
 
                                     <td class="py-3 pr-2 pl-3 pr-6 text-sm font-medium text-right whitespace-nowrap">
 
-                                        @if ($exam->is_active)
+                                        @if ($exam->is_active )
 
                                         <a href="{{route('student.exam', $exam->id)}}"
                                             class="middle none center rounded-lg bg-green-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
@@ -119,7 +135,7 @@
                                         @else
 
                                         <a href=""
-                                            class="cursor-not-allowed middle none center rounded-lg bg-gray-400 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg-underline hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                            class="pointer-events-none middle none center rounded-lg bg-gray-400 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg-underline hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                             <i class="fa fa-hourglass-start" aria-hidden="true"></i> Start</a>
 
                                         @endif
