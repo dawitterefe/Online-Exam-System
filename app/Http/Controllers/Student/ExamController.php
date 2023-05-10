@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\ExamStatus;
 use App\Models\Question;
 use App\Models\Result;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -29,14 +31,37 @@ class ExamController extends Controller
     public function showExam(string $id)
     {
         $exam = Exam::findOrFail($id);
-        $questions =  Question::where('exam_id', $exam->id)->latest()->get();
+        $student_id = auth::user()->student->id;
+        $questions = Question::where('exam_id', $exam->id)->inRandomOrder()->get();
 
-        if (Result::where('student_id', auth::user()->student->id)->where('exam_id', $exam->id)->exists()) {
+
+        if (Result::where('student_id', $student_id)->where('exam_id', $exam->id)->exists()) {
 
             return Redirect::route('student.exams', compact('exam', 'questions'))->with('status', 'already_taken');
         } else {
-            return view('student.exam', compact('exam', 'questions'));
+
+            if (ExamStatus::where('student_id', $student_id)->where('exam_id', $exam->id)->doesntExist()) {
+
+                ExamStatus::create([
+                    'exam_id' => $exam->id,
+                    'student_id' => $student_id,
+                    'started_at' => now(),
+                ]);
+                $duration = $exam->duration;
+                return view('student.exam', compact('exam', 'questions','duration'));
+            } else {
+                $duration = ExamStatus::where('student_id', $student_id)->where('exam_id', $exam->id)->value('remaining_time');
+                return view('student.exam', compact('exam', 'questions','duration'));
+            }
         }
+    }
+
+    public function sendRemainingTime(string $remaining_time, string $exam_id)
+    {
+        ExamStatus::where('student_id', auth::user()->student->id)->where('exam_id', $exam_id)->update([
+            'remaining_time' => $remaining_time
+        ]);
+        return 'working in the shadow';
     }
 
     public function submitExam(Request $request, string $id)
@@ -64,6 +89,12 @@ class ExamController extends Controller
         } else  $result->passed = false;
 
         $result->save();
+
+        ExamStatus::where('student_id', auth::user()->student->id)->where('exam_id', $exam->id)->update([
+            'finished_at' => now()
+        ]);
+
+
 
         $student = auth()->user()->student;
         $results = Result::where('student_id', $student->id)->latest()->paginate(3);

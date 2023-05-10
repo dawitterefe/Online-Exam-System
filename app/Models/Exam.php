@@ -44,4 +44,9 @@ class Exam extends Model
     {
         return $this->hasMany(Result::class);
     }
+
+    public function statuses()
+    {
+        return $this->hasMany(ExamStatus::class);
+    }
 }

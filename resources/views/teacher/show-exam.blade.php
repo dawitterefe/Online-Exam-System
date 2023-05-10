@@ -46,6 +46,21 @@
             </div>
             @endif
         </div>
+        <div class="mt-3 mb-1">
+            @if (session('status') === 'exam_full')
+            <div class="flex items-center gap-2">
+                <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
+                    <x-gmdi-notifications-active-o class="w-5 h-5 text-red-600 dark:text-red-400" />
+                </div>
+                <div>
+                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+                        class="text-sm font-bold text-red-600 dark:text-red-400">
+                        {{ __('The exam is full, edit the total number of questions for this exam and try again.') }}
+                    </p>
+                </div>
+            </div>
+            @endif
+        </div>
 
     </x-slot>
     <!-- component -->
@@ -81,27 +96,27 @@
                                 <div>
                                     <a href="{{ route('question.create', $exam->id) }}"
                                         class="middle none center rounded-lg bg-yellow-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg-underline hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Question</a>
+                                        <i class="fa fa-plus" aria-hidden="true"></i> Question</a>
                                 </div>
                                 @if ($exam->evaluations()->wherePivot('approved', true)->count() >= 1 &&
                                 $exam->is_active == false)
                                 <div>
                                     <a href="{{ route('exam.activate', $exam->id) }}"
                                         class="middle none center rounded-lg bg-green-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg-underline hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Activate</a>
+                                        <i class="fa fa-power-off" aria-hidden="true"></i></i> Activate</a>
                                 </div>
                                 @elseif ($exam->evaluations()->wherePivot('approved', true)->count() >= 1 &&
                                 $exam->is_active == true)
                                 <div>
                                     <a href="{{ route('exam.deactivate', $exam->id) }}"
                                         class="middle none center rounded-lg bg-red-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg-underline hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Deactivate</a>
+                                        <i class="fa fa-power-off" aria-hidden="true"></i> Deactivate</a>
                                 </div>
                                 @else
                                 <div>
                                     <a href=""
                                         class="pointer-events-none middle none center rounded-lg bg-gray-400 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg-underline hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Activate</a>
+                                        <i class="fa fa-power-off" aria-hidden="true"></i> Activate</a>
                                 </div>
                                 @endif
 
@@ -245,12 +260,16 @@
             </div>
         </div>
     </div>
+    @if ($reviews->first() != null)
     <div class="flex justify-start items-center gap-2 mb-2 mt-5 text-3xl font-medium leading-tight text-primary">
         <div>
             <x-gmdi-rate-review-o class="h-9 w-9" />
         </div>
         <div>Evaluations</div>
     </div>
+    @else <div class="my-2 mx-2">No evaluations so far...</div>
+    @endif
+
     <div
         class="my-3 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
 

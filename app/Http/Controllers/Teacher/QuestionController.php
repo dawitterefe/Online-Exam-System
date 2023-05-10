@@ -13,7 +13,14 @@ class QuestionController extends Controller
     public function create(string $id)
     {
         $exam = Exam::findOrFail($id);
-        return view('teacher.create-question', compact('exam'));
+
+        $total_created_questions = Question::where('exam_id', $exam->id)->count();
+
+        if ($total_created_questions < $exam->total_questions) {
+            return view('teacher.create-question', compact('exam'));
+        } else {
+            return redirect()->back()->with('status', 'exam_full');
+        }
     }
 
     public function store(Request $request)
@@ -77,7 +84,6 @@ class QuestionController extends Controller
         $exam_id = Exam::findOrFail($exam);
 
         return redirect()->route('exams.show', $exam_id->id);
-
     }
 
 

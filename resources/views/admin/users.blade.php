@@ -105,7 +105,7 @@
                                         {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
                                     </td>
                                     <td
-                                        class="py-2 pl-6 pl-3 pr-0 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                        class="py-1 pl-6 pl-3 pr-0 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
                                         <img src="{{ asset($user->avatar) }}" class="w-7 h-7 my-3 mx-auto rounded-full"
                                             alt="Avatar" />
                                     </td>

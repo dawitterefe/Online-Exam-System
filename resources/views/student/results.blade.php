@@ -18,11 +18,11 @@
     <div class="mt-3 mb-1">
         @if (session('status') === 'passed')
         <div class="flex items-center gap-2">
-            <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
+            <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 4000)">
                 <x-fas-smile class="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
             </div>
             <div>
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 4000)"
                     class="text-sm font-bold text-green-600 dark:text-green-400">
                     {{ __('Congratulations! You passed the exam.') }}
                 </p>
@@ -34,11 +34,11 @@
     <div class="mt-3 mb-1">
         @if (session('status') === 'failed')
         <div class="flex items-center gap-2">
-            <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
+            <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 4000)">
                 <x-fas-face-sad-tear class="w-5 h-5 text-red-600 dark:text-red-400" />
             </div>
             <div>
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 4000)"
                     class="text-sm font-bold text-red-600 dark:text-red-400">
                     {{ __('You failed this exam. Looks like you need to study more.') }}
                 </p>

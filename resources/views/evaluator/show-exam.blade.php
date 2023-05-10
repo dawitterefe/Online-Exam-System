@@ -256,12 +256,15 @@
             </form>
         </div>
         @endif
+        @if ($reviews->first() != null)
         <div class="flex justify-start items-center gap-2 mb-2 mt-5 text-3xl font-medium leading-tight text-primary">
             <div>
                 <x-gmdi-rate-review-o class="h-9 w-9" />
             </div>
             <div>Evaluations</div>
         </div>
+        @else <div class="my-2 mx-2">No evaluations so far...</div>
+        @endif
         <div
             class="my-3 inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800 grid justify-center">
 

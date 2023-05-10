@@ -101,6 +101,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student-exam/{id}', [StudentExamController::class, 'showExam'])->name('student.exam');
     Route::post('/student-submit-exam/{id}', [StudentExamController::class, 'submitExam'])->name('student.submit-exam');
     Route::get('/student-exam-results', [StudentExamController::class, 'showResults'])->name('student.exam-results');
+    Route::get('/send-remaining-time/{remaining_time}/exam-id/{exam_id}',[StudentExamController::class,'sendRemainingTime'])->name('send-remaining-time');
 });
 
 

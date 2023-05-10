@@ -20,11 +20,11 @@
         @if (session('status') === 'already_taken')
         <div class="flex items-center gap-2">
             <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
-                <x-gmdi-notifications-active-o class="w-5 h-5 text-green-600 dark:text-green-400" />
+                <x-gmdi-notifications-active-o class="w-5 h-5 text-amber-600 dark:text-amber-400" />
             </div>
             <div>
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
-                    class="text-sm font-bold text-green-600 dark:text-green-400">
+                    class="text-sm font-bold text-amber-600 dark:text-amber-400">
                     {{ __('You have alaready taken the exam') }}
                 </p>
             </div>
@@ -35,8 +35,6 @@
 
     <!-- component -->
     <div class="max-w-5xl mt-3 mx-auto">
-
-
         <div class="flex flex-col">
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle">
