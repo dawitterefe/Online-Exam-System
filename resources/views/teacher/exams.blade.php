@@ -53,12 +53,12 @@
                                     </th>
 
                                     <th scope="col"
-                                        class="py-3 px-1 text-xs  tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                        class="py-3 pl-2 pr-1 text-xs  tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                         Course
                                     </th>
 
                                     <th scope="col"
-                                        class="py-3 px-3 text-xs font-large tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                        class="py-3 pl-4 pr-3 text-xs font-large tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                         Exam Starts
                                     </th>
                                     <th scope="col"

@@ -84,20 +84,33 @@
             request()
                 ->route()
                 ->getName(),
-            [
-                'exams.index',
-                'exams.create',
-                'exams.show',
-                'exams.create',
-                'exams.delete',
-                'exams.trashed',
-                'exams.edit',
-                'question.create',
-                'question.edit',
+            ['exams.index','exams.create','exams.show','exams.create','exams.trashed','exams.edit','question.create','question.edit',
             ],
         )">
         <x-slot name="icon">
             <x-majestic-checkbox-list-detail-solid class="w-6 h-6" />
+        </x-slot>
+    </x-sidebar.link>
+    {{-- View Results --}}
+    <x-sidebar.link title="Results" href="{{route('exams.result')}}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['exams.result','exam.results'],
+        )">
+        <x-slot name="icon">
+            <x-fas-award class="w-6 h-6" />
+        </x-slot>
+    </x-sidebar.link>
+    {{-- View Statuses --}}
+    <x-sidebar.link title="Statuses" href="{{route('exams.status')}}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['exams.status','exam.statuses'],
+        )">
+        <x-slot name="icon">
+            <x-si-statuspage class="w-5 h-5" />
         </x-slot>
     </x-sidebar.link>
     @endif
@@ -149,7 +162,6 @@
             <x-majestic-checkbox-list-detail-solid class="w-6 h-6" />
         </x-slot>
     </x-sidebar.link>
-
     {{-- Result --}}
     <x-sidebar.link title="My Result" href="{{ route('student.exam-results') }}" :isActive="in_array(
             request()
@@ -158,7 +170,7 @@
             ['student.exam-results',],
         )">
         <x-slot name="icon">
-            <x-fas-award class="w-6 h-6"  />
+            <x-fas-award class="w-6 h-6" />
         </x-slot>
     </x-sidebar.link>
     @endif

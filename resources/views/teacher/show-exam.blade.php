@@ -25,7 +25,7 @@
                 <div>
                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
                         class="text-sm font-bold text-green-600 dark:text-green-400">
-                        {{ __('The Exam is now online') }}
+                        {{ __('The Exam is now online.') }}
                     </p>
                 </div>
             </div>

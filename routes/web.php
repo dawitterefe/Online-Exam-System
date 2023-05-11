@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\ExamController as StudentExamController;
 use App\Http\Controllers\teacher\QuestionController;
+use App\Http\Controllers\Teacher\ResultAndStatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,13 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
 
     Route::get('/exam/{id}/activate', [ExamController::class, 'activate'])->name('exam.activate');
     Route::get('/exam/{id}/deactivate', [ExamController::class, 'deactivate'])->name('exam.deactivate');
+
+    Route::get('/exams-result', [ResultAndStatusController::class, 'showExams'])->name('exams.result');
+    Route::get('/exam-results/{id}', [ResultAndStatusController::class, 'showExamResults'])->name('exam.results');
+
+    Route::get('/exams-status', [ResultAndStatusController::class, 'showExamStatuses'])->name('exams.status');
+    Route::get('/exam-statuses/{id}', [ResultAndStatusController::class, 'showExamStatus'])->name('exam.statuses');
+
 });
 
 
