@@ -18,7 +18,12 @@
     {{-- Component --}}
     <div class="mb-4 pb-10 px-8 mx-10 rounded-xl bg-gray-200 dark:bg-slate-700 ">
         <div class="flex items-center gap-2 pt-7 ml-7">
-            <div><h1 class="text-xl font-bold " id="greeting"></h1></div> <div><h1 class="text-xl font-bold ">{{Auth::user()->name}}.</h1></div>
+            <div>
+                <h1 class="text-xl font-bold " id="greeting"></h1>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold ">{{Auth::user()->name}}.</h1>
+            </div>
         </div>
         {{-- group 1 --}}
         <div class="flex items-center gap-5 px-5 pt-10">
@@ -123,7 +128,8 @@
                         <div class="ml-2 w-full flex-1">
                             <div>
                                 <div class="mt-2 text-3xl font-bold leading-8 ">
-                                    {{\App\Models\Exam::where('is_active', false)->count()}}</div>
+                                    {{\App\Models\Exam::whereIn('course_id',(auth()->user()->teacher->courses)->pluck('id'))->where('is_active',
+                                    false)->count()}}</div>
 
                                 <div class="mt-1 text-base text-gray-600 dark:text-gray-500">Upcoming Exams
                                 </div>
@@ -388,7 +394,7 @@
                 </table>
             </div>
         </div>
-        {{-- Ongoing Exams --}}
+        {{-- upcoming Exams --}}
         <div class="px-5 pt-6 w-full">
             <div id="courses"
                 class="flex justify-start items-center gap-2 mb-3 text-3xl font-medium leading-tight text-primary">
@@ -396,7 +402,7 @@
                 <div>
                     <x-uni-calender-o class="h-8 w-8 text-pink-600 dark:text-pink-500 " />
                 </div>
-                <div class="text-xl">upcoming Exams</div>
+                <div class="text-xl">Upcoming Exams</div>
             </div>
 
             <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700  rounded-lg">
@@ -427,7 +433,8 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
-                    @foreach (\App\Models\Exam::where('is_active', false)->get() as $exam)
+                    @foreach (\App\Models\Exam::whereIn('course_id',(auth()->user()->teacher->courses)->pluck('id'))->where('is_active',
+                    false)->get() as $exam)
                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                         <td
                             class="py-2 pl-6 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-tl-lg  rounded-bl-lg">
@@ -437,7 +444,7 @@
                             <div class="w-30 truncate"> {{$exam->name }} </div>
                         </td>
                         <td class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                            {{$exam->course_code}}</td>
+                            {{$exam->course->course_code}}</td>
 
                         <td
                             class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-tr-lg  rounded-br-lg">
