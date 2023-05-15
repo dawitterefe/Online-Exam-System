@@ -83,7 +83,12 @@
                                         {{ $exam->course->course_code }}</td>
                                     <td
                                         class="py-2 pr-3 pl-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        @if (isset(\App\Models\ExamStatus::where('exam_id'
+                                        ,$exam->id)->oldest('created_at')->first()->created_at))
                                         {{\App\Models\ExamStatus::where('exam_id',$exam->id)->oldest('created_at')->first()->created_at}}
+                                        @else
+                                        Exam not yet started
+                                        @endif
                                     </td>
                                     <td
                                         class="py-2 pr-2 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">

@@ -67,6 +67,51 @@
                     </div>
                 </a>
             </div>
+            {{-- Approved Exams --}}
+            <div
+                class="w-full transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white dark:bg-slate-800">
+
+                <a href="#courses">
+                    <div class="p-5">
+                        <div class="flex justify-end">
+                            <x-gmdi-task-o class="h-9 w-9 text-green-600 dark:text-green-500 " />
+                        </div>
+                        <div class="ml-2 w-full flex-1">
+                            <div>
+                                <div class="mt-2 text-3xl font-bold leading-8 ">
+                                    {{\App\Models\ExamReview::where('evaluator_id',auth::user()->evaluator->id)->where('approved',
+                                    true)->count()}}
+                                </div>
+                                <div class="mt-1 text-base text-gray-600 dark:text-gray-500">Approved Exams
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {{-- Rejected Exams --}}
+            <div
+                class="w-full transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white dark:bg-slate-800">
+
+                <a href="#courses">
+                    <div class="p-5">
+                        <div class="flex justify-end">
+                            <x-iconpark-reject-o class="h-9 w-9 text-red-600 dark:text-red-500 " />
+
+                        </div>
+                        <div class="ml-2 w-full flex-1">
+                            <div>
+                                <div class="mt-2 text-3xl font-bold leading-8 ">
+                                    {{\App\Models\ExamReview::where('evaluator_id',auth::user()->evaluator->id)->where('approved',
+                                    false)->count()}}
+                                </div>
+                                <div class="mt-1 text-base text-gray-600 dark:text-gray-500">Rejected Exams
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
         </div>
         {{-- tables --}}
@@ -192,9 +237,140 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
+        {{-- Row two tables --}}
+        <div class="flex gap-5">
+            {{-- Approved exams --}}
+            <div class="pl-5 pt-10 w-full">
+                <div id="approved"
+                    class="flex justify-start items-center gap-2 mb-3 text-3xl font-medium leading-tight text-primary">
 
+                    <div>
+                        <x-gmdi-task-o class="h-9 w-9 text-green-600 dark:text-green-500 " />
+                    </div>
+                    <div class="text-xl">Exams Approved By You</div>
+                </div>
+
+                <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700  rounded-lg">
+                    <thead class="bg-gray-400 dark:bg-gray-800">
+
+                        <tr>
+                            <th scope="col"
+                                class="py-3 pl-6 pr-1 text-xs font-large tracking-wider text-left text-white uppercase dark:text-gray-400 rounded-tl-lg  rounded-bl-lg">
+                                <span>#</span>
+                            </th>
+
+                            <th scope="col"
+                                class="py-3 px-3 text-xs font-large tracking-wider text-left text-white uppercase dark:text-gray-400">
+                                Name
+                            </th>
+
+                            <th scope="col"
+                                class="py-3 pl-2 pr-1 text-xs  tracking-wider text-left text-white uppercase dark:text-gray-400">
+                                Course
+                            </th>
+
+                            <th scope="col"
+                                class="py-3 px-3 text-xs font-large tracking-wider text-left text-white uppercase dark:text-gray-400 rounded-tr-lg  rounded-br-lg">
+                                <div class="w-30 truncate">Approved By</div>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+
+                        @foreach (\App\Models\ExamReview::where('evaluator_id',
+                        auth::user()->evaluator->id)->where('approved',
+                        true)->get() as $review)
+                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <td
+                                class="py-2 pl-6 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-tl-lg  rounded-bl-lg">
+                                {{ $loop->iteration }}
+                            </td>
+                            <td
+                                class=" py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <div class="w-30 truncate"> {{\App\Models\Exam::findOrFail($review->exam_id)->name}}
+                                </div>
+                            </td>
+                            <td class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                {{\App\Models\Course::findOrFail(\App\Models\Exam::findOrFail($review->exam_id)->course_id)->course_code}}
+                            </td>
+                            <td
+                                class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-tr-lg  rounded-br-lg">
+                                {{\App\Models\Exam::findOrFail($review->exam_id)->evaluations()->wherePivot('approved',
+                                true)->count()}} Evaluators
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            {{--Rejectd exams --}}
+            <div class="pr-5 pt-10 w-full">
+                <div id="approved"
+                    class="flex justify-start items-center gap-2 mb-3 text-3xl font-medium leading-tight text-primary">
+
+                    <div>
+                        <x-iconpark-reject-o class="h-9 w-9 text-red-600 dark:text-red-500 " />
+                    </div>
+                    <div class="text-xl">Exams Rejected By You</div>
+                </div>
+
+                <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700  rounded-lg">
+                    <thead class="bg-gray-400 dark:bg-gray-800">
+
+                        <tr>
+                            <th scope="col"
+                                class="py-3 pl-6 pr-1 text-xs font-large tracking-wider text-left text-white uppercase dark:text-gray-400 rounded-tl-lg  rounded-bl-lg">
+                                <span>#</span>
+                            </th>
+
+                            <th scope="col"
+                                class="py-3 px-3 text-xs font-large tracking-wider text-left text-white uppercase dark:text-gray-400">
+                                Name
+                            </th>
+
+                            <th scope="col"
+                                class="py-3 pl-2 pr-1 text-xs  tracking-wider text-left text-white uppercase dark:text-gray-400">
+                                Course
+                            </th>
+
+                            <th scope="col"
+                                class="py-3 px-3 text-xs font-large tracking-wider text-left text-white uppercase dark:text-gray-400 rounded-tr-lg  rounded-br-lg">
+                                <div class="w-30 truncate">Approved By</div>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+
+                        @foreach (\App\Models\ExamReview::where('evaluator_id',
+                        auth::user()->evaluator->id)->where('approved',
+                        false)->get() as $review)
+                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <td
+                                class="py-2 pl-6 pr-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-tl-lg  rounded-bl-lg">
+                                {{ $loop->iteration }}
+                            </td>
+                            <td
+                                class=" py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <div class="w-30 truncate"> {{\App\Models\Exam::findOrFail($review->exam_id)->name}}
+                                </div>
+                            </td>
+                            <td class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                                {{\App\Models\Course::findOrFail(\App\Models\Exam::findOrFail($review->exam_id)->course_id)->course_code}}
+                            </td>
+                            <td
+                                class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-tr-lg  rounded-br-lg">
+                                {{\App\Models\Exam::findOrFail($review->exam_id)->evaluations()->wherePivot('approved',
+                                true)->count()}} Evaluators
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script>
