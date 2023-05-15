@@ -35,7 +35,7 @@
 
                 <!-- Navbar -->
                 <nav aria-label="secondary" x-data="{ open: false }"
-                    class="sticky top-0 z-10 flex items-center justify-between px-4 py-3 sm:px-6 transition-transform duration-500 bg-white dark:bg-dark-eval-1"
+                    class="sticky top-0 z-10 flex items-center justify-between px-4 py-3 sm:px-6 transition-transform duration-500 bg-gray-100 dark:bg-dark-eval-0"
                     :class="{
                         '-translate-y-full': scrollingDown,
                         'translate-y-0': scrollingUp,
@@ -96,10 +96,10 @@
                                     in</a>
 
                                 @if (\App\Models\User::count() == 0)
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}"
-                                            class="ml-4 font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Register</a>
-                                    @endif
+                                @if (Route::has('register'))
+                                <a href="{{ route('register') }}"
+                                    class="ml-4 font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Register</a>
+                                @endif
                                 @endif
 
                                 @endauth
@@ -121,9 +121,34 @@
 
 
                 <!-- Page Content -->
-                <main class="px-4 sm:px-6 flex-1 mx-5 my-5">
+                <main class="px-4 sm:px-6 flex-1 mx-4 mt-4 mb-5">
+                    <!--Hero-->
+                    <div class="pt-20">
+                        <div class="flex justify-between items-center gap-20">
+                            <!--Left Col-->
+                            <div
+                                class="flex flex-col w-full md:w-3/5 justify-center items-start text-center md:text-left">
 
-                    <div class=""> <span class="font-bold text-5xl flex justify-center mt-10"> Welcome!</span>
+                                {{-- <img src="storage/img/dbu-logo.png" class="w-1/5 mb-1 " /> --}}
+
+                                <p class="uppercase tracking-loose w-full text-xl ml-2">Debre Berhan University</p>
+
+                                <h1 class="my-4 text-5xl font-bold leading-tight">
+                                    Online Examination System
+                                </h1>
+                                <p class="leading-normal text-base mb-8 ml-2">
+                                    No more #2 pencils or sweaty palms. We've got you covered.
+                                </p>
+
+                                <a href="{{ route('login') }}"
+                                    class="middle none center rounded-lg ml-2 bg-cyan-500 py-2 px-6 font-sans text-lg font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                    </i>Log in</a>
+                            </div>
+                            <!--Right Col-->
+                            <div class="md:w-2/5 -mr-2">
+                                <img src="storage/img/landing.png"/>
+                            </div>
+                        </div>
                     </div>
 
                 </main>

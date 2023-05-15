@@ -121,27 +121,7 @@
                                                     :value="old('email', $user->email)" required autocomplete="email" />
 
                                                 <x-form.error :messages="$errors->get('email')" />
-
                                             </div>
-
-                                            {{-- Role --}}
-                                            {{-- <div class="space-y-2">
-
-                                                <x-form.label for="roles" :value="__('Role')" />
-
-                                                <select id="roles" name="roles"
-                                                    class="py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1">
-
-                                                    <option selected><i class="fa fa-trash-alt"></i>Select a role
-                                                    </option>
-
-                                                    @foreach ($roles as $role)
-                                                    <option {{ $role->id == $user->role_id ? 'selected' : '' }}
-                                                        value="{{ $role->id }}">{{ $role->name }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div> --}}
 
                                             {{-- save --}}
                                             <div class="mt-5 mb-10 flex justify-end">
