@@ -1,7 +1,7 @@
 <footer class="flex-shrink-0 px-3 py-4">
 
      <footer class="flex flex-col items-center justify-between px-4 py-3 mx-auto max-w-7xl md:flex-row">
-        <p class="mb-3 text-sm text-center text-700 md:text-left md:mb-0">© Copyright 2023 Debre Birhan University. All Rights Reserved.</p>
+        <p class="mb-3 text-sm text-center text-700 md:text-left md:mb-0">© Debre Birhan University 2023. All Rights Reserved.</p>
 
         <div class="flex items-center space-x-6">
           <a href="#">
