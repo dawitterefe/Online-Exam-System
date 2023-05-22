@@ -289,15 +289,15 @@
                             </td>
                             <td
                                 class=" py-2 pr-3 pl-0 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <div class="w-30 truncate"> {{\App\Models\Exam::findOrFail($review->exam_id)->name}}
+                                <div class="w-30 truncate"> {{\App\Models\Exam::withTrashed()->findOrFail($review->exam_id)->name}}
                                 </div>
                             </td>
                             <td class="py-2 px-1 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                                {{\App\Models\Course::findOrFail(\App\Models\Exam::findOrFail($review->exam_id)->course_id)->course_code}}
+                                {{\App\Models\Course::findOrFail(\App\Models\Exam::withTrashed()->findOrFail($review->exam_id)->course_id)->course_code}}
                             </td>
                             <td
                                 class="py-2 px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white rounded-tr-lg  rounded-br-lg">
-                                {{\App\Models\Exam::findOrFail($review->exam_id)->evaluations()->wherePivot('approved',
+                                {{\App\Models\Exam::withTrashed()->findOrFail($review->exam_id)->evaluations()->wherePivot('approved',
                                 true)->count()}} Evaluators
                             </td>
                         </tr>
