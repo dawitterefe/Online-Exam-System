@@ -51,7 +51,7 @@ class UserController extends Controller
             'father_name' => $request->last_name,
             'gender' => $request->input('gender'),
             'email' => $request->email,
-            'password' => bcrypt($request->email.'#'.$request->last_name),
+            'password' => bcrypt($request->email . '#' . $request->last_name),
             'role_id' => $request->roles,
         ]);
 
@@ -86,7 +86,7 @@ class UserController extends Controller
                 'table' => 'evaluators', 'length' => 14, 'prefix' => 'dbue-', 'suffix' => date('-Y')
             ]);
 
-            $teacher = Evaluator::create([
+            $evaluator = Evaluator::create([
                 'id' => $id,
                 'user_id' => $user->id,
             ]);
@@ -110,7 +110,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $roles = Role::all();
+        $roles = Role::whereNotIn('name', ['Student'])->get();
         $user = User::findOrFail($id);
         return view('admin.edit-user', compact('user', 'roles'));
     }
@@ -152,10 +152,60 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->gender = $request->input('gender');
 
+        if ($user->role->id != 3 ) {
+
+            $oldRole = $user->role;
+            $newRole = Role::find($request->input('role'));
+
+            // This happen if the role is changed in the form
+            if ($oldRole->id != $newRole->id) {
+
+                $user->role_id = $newRole->id;
+                $user->save();
+
+                if ($oldRole->id == 4) {
+                    $teacher = Teacher::where('user_id', $user->id)->first();
+                    $teacher->delete();
+                }
+
+                if ($oldRole->id == 2) {
+                    $evaluator = Evaluator::where('user_id', $user->id)->first();
+                    $evaluator->delete();
+                }
+
+                if ($newRole->id == 2) {
+
+                    $id = UniqueIdGenerator::generate([
+                        'table' => 'evaluators', 'length' => 14, 'prefix' => 'dbue-', 'suffix' => date('-Y')
+                    ]);
+
+                    $evaluator = Evaluator::create([
+                        'id' => $id,
+                        'user_id' => $user->id,
+                    ]);
+                }
+
+                if ($newRole->id == 4) {
+
+                    $id = UniqueIdGenerator::generate([
+                        'table' => 'teachers', 'length' => 14, 'prefix' => 'dbut-', 'suffix' => date('-Y')
+                    ]);
+
+                    $evaluator = Teacher::create([
+                        'id' => $id,
+                        'user_id' => $user->id,
+                    ]);
+                }
+            }
+        }
+
+
+
+
+
         $user->save();
 
-        return Redirect::route('users.edit', $user->id)->with('status', 'profile-updated');
-        // return $user;
+        return redirect()->back();
     }
 
     /**

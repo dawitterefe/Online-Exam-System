@@ -78,7 +78,7 @@
                                             class="py-5 px-4 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             <div class="w-40 truncate">
                                                 {{ $course->course_title }}
-                                                </div< /td>
+                                                </div></td>
                                         <td
                                             class="py-5 px-6 text-sm font-medium text-gray-700 whitespace-nowrap dark:text-white">
                                             {{ $course->credit_hour }}</td>

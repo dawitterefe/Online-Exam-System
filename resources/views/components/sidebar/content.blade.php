@@ -31,6 +31,17 @@
             <x-iconpark-bookshelf class="w-5 h-5" />
         </x-slot>
     </x-sidebar.link>
+    {{-- Sections Control --}}
+    <x-sidebar.link title="Sections" href="{{ route('sections.index') }}" :isActive="in_array(
+            request()
+                ->route()
+                ->getName(),
+            ['sections.index', 'sections.create','sections.show','sections.edit','sections.delete','sections.trashed'],
+        )">
+        <x-slot name="icon">
+            <x-fas-people-roof class="w-6 h-6"  />
+        </x-slot>
+    </x-sidebar.link>
     {{-- Students Control --}}
     <x-sidebar.link title="Students" href="{{ route('admin.students') }}" :isActive="in_array(
             request()

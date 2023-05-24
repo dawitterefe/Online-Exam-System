@@ -27,6 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
         theme: "material_blue",
         className: "rounded border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:ring-opacity-50"
     });
+    flatpickr("#year", {
+        dateFormat: "Y",
+        className: "rounded border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:ring-opacity-50"
+    });
 });
 
 document.addEventListener('alpine:init', () => {

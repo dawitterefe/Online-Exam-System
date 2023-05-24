@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('section_id')->nullable()->constrained('sections')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+
+            $table->unique(['id', 'section_id']);
         });
     }
 

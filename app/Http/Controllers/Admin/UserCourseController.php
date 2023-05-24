@@ -28,23 +28,6 @@ class UserCourseController extends Controller
         return view('admin.student-course', compact('student', 'courses'));
     }
 
-    public function assignStudentCourses(Request $request, string $id)
-    {
-        $student = Student::findOrFail($id);
-        $student->courses()->attach($request->input('courses'));
-
-        return Redirect::route('admin.show_student_courses', $student->id)->with('status', 'profile-updated');
-    }
-
-    public function detachStudentCourses(Request $request, string $student_id, string $course_id)
-    {
-        $student = Student::findOrFail($student_id);
-        $student->courses()->detach($course_id);
-
-        return Redirect::route('admin.show_student_courses', $student->id)->with('status', 'profile-updated');
-    }
-
-
     // Techers Course Control
 
     public function showTeachers()

@@ -104,7 +104,7 @@
                                     <td class="py-2 pr-7 pl-0 text-sm font-medium text-right whitespace-nowrap">
                                         <a href="{{route('admin.show_student_courses',$student->id)}}"
                                             class="middle none center rounded-lg bg-cyan-500 py-1 px-2 font-sans text-xs font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                                            <i class="fa-solid fa-book"></i> Course</a>
+                                            <i class="fa-solid fa-book"></i> Courses</a>
                                     </td>
 
                                 </tr>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserCourseController;
 use App\Http\Controllers\Evaluator\ExamEvaluationController;
@@ -48,9 +49,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/courses', CourseController::class);
 
     Route::get('/students', [UserCourseController::class, 'showStudents'])->name('admin.students');
-    Route::get('/students/{id}/assign-course', [UserCourseController::class, 'showStudentCourses'])->name('admin.show_student_courses');
-    Route::get('/students/{id}/add-course', [UserCourseController::class, 'assignStudentCourses'])->name('admin.assign_student_courses');
-    Route::get('/students/{student_id}/{course_id}/detach-course', [UserCourseController::class, 'detachStudentCourses'])->name('admin.detach_student_courses');
+    Route::get('/students/{id}/show-student-courses', [UserCourseController::class, 'showStudentCourses'])->name('admin.show_student_courses');
+
+
 
     Route::get('/teachers', [UserCourseController::class, 'showTeachers'])->name('admin.teachers');
     Route::get('/teachers/{id}/assign-course', [UserCourseController::class, 'showTeacherCourses'])->name('admin.show_teacher_courses');
@@ -61,6 +62,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/evaluators/{id}/assign-course', [UserCourseController::class, 'showEvaluatorCourses'])->name('admin.show_evaluator_courses');
     Route::get('/evaluators/{id}/add-course', [UserCourseController::class, 'assignEvaluatorCourses'])->name('admin.assign_evaluator_courses');
     Route::get('/evaluators/{evaluator_id}/{course_id}/detach-course', [UserCourseController::class, 'detachEvaluatorCourses'])->name('admin.detach_evaluator_courses');
+
+    Route::get('/sections/{id}/add-course', [SectionController::class, 'assignSectionCourses'])->name('admin.assign_section_courses');
+    Route::get('/sections/{section_id}/{course_id}/detach-course', [SectionController::class, 'detachStudentCourses'])->name('admin.detach_section_courses');
+    Route::get('/sections/{id}/add-student', [SectionController::class, 'addStudents'])->name('admin.add_students');
+    Route::get('/sections/{id}/{section_id}/remove-student-section', [SectionController::class, 'removeStudentSection'])->name('admin.remove_student_section');
+
+    Route::get('/sections/trash', [SectionController::class, 'trashed'])->name('sections.trashed');
+    Route::get('/sections/{id}/restore', [SectionController::class, 'restore'])->name('sections.restore');
+    Route::delete('/sections/{id}/force-delete', [SectionController::class, 'forceDelete'])->name('sections.force_delete');
+    Route::resource('/sections', SectionController::class);
 });
 
 // TEACHER ROUTES
@@ -86,7 +97,6 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
 
     Route::get('/exams-status', [ResultAndStatusController::class, 'showExamStatuses'])->name('exams.status');
     Route::get('/exam-statuses/{id}', [ResultAndStatusController::class, 'showExamStatus'])->name('exam.statuses');
-
 });
 
 
@@ -109,7 +119,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student-exam/{id}', [StudentExamController::class, 'showExam'])->name('student.exam');
     Route::post('/student-submit-exam/{id}', [StudentExamController::class, 'submitExam'])->name('student.submit-exam');
     Route::get('/student-exam-results', [StudentExamController::class, 'showResults'])->name('student.exam-results');
-    Route::get('/send-remaining-time/{remaining_time}/exam-id/{exam_id}',[StudentExamController::class,'sendRemainingTime'])->name('send-remaining-time');
+    Route::get('/send-remaining-time/{remaining_time}/exam-id/{exam_id}', [StudentExamController::class, 'sendRemainingTime'])->name('send-remaining-time');
 });
 
 

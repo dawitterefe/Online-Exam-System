@@ -48,23 +48,23 @@
                                                 <option selected>Select the course</option>
 
                                                 @foreach ($courses as $course)
-                                                    <option value="{{ $course->id }}">{{ $course->course_title }}
-                                                    </option>
+                                                <option value="{{ $course->id }}">{{ $course->course_title }}
+                                                </option>
                                                 @endforeach
                                             </select>
                                         </div>
 
                                         <!-- exam name-->
                                         <div class="space-y-2">
-                                            <x-form.label for="exam_name" :value="__('Exam Name')" />
+                                            <x-form.label class="mt-3" for="exam_name" :value="__('Exam Name')" />
 
                                             <x-form.input-with-icon-wrapper>
                                                 <x-slot name="icon">
                                                     <x-tabler-id-badge-2 class="w-5 h-5" />
                                                 </x-slot>
 
-                                                <x-form.input withicon id="exam_name" class="block w-full"
-                                                    type="text" name="exam_name" :value="old('exam_name')" required autofocus
+                                                <x-form.input withicon id="exam_name" class="block w-full" type="text"
+                                                    name="exam_name" :value="old('exam_name')" required autofocus
                                                     placeholder="{{ __('Exam Name') }}" />
                                             </x-form.input-with-icon-wrapper>
                                         </div>
@@ -74,7 +74,7 @@
                                         <div class="inline-flex items-center gap-3">
                                             <!-- total questions-->
                                             <div class="space-y-2 ">
-                                                <x-form.label for="total_questions" :value="__('Total Questions')" />
+                                                <x-form.label class="mt-3" for="total_questions" :value="__('Total Questions')" />
 
                                                 <x-form.input-with-icon-wrapper>
                                                     <x-slot name="icon">
@@ -82,13 +82,14 @@
                                                     </x-slot>
 
                                                     <x-form.input withicon id="total_questions" class="block w-full"
-                                                        type="text" name="total_questions" :value="old('total_questions')" required
-                                                        autofocus placeholder="{{ __('Total Questions') }}" />
+                                                        type="text" name="total_questions"
+                                                        :value="old('total_questions')" required autofocus
+                                                        placeholder="{{ __('Total Questions') }}" />
                                                 </x-form.input-with-icon-wrapper>
                                             </div>
                                             <!-- Passing Score-->
                                             <div class="space-y-2">
-                                                <x-form.label for="passing_score" :value="__('Passing Score')" />
+                                                <x-form.label class="mt-3" for="passing_score" :value="__('Passing Score')" />
 
                                                 <x-form.input-with-icon-wrapper>
                                                     <x-slot name="icon">
@@ -96,8 +97,8 @@
                                                     </x-slot>
 
                                                     <x-form.input withicon id="passing_score" class="block w-full"
-                                                        type="text" name="passing_score" :value="old('passing_score')" required
-                                                        autofocus placeholder="{{ __('Passing Score') }}" />
+                                                        type="text" name="passing_score" :value="old('passing_score')"
+                                                        required autofocus placeholder="{{ __('Passing Score') }}" />
                                                 </x-form.input-with-icon-wrapper>
                                             </div>
                                         </div>
@@ -108,16 +109,18 @@
                                     <div>
                                         <!-- Exam Description -->
                                         <div class="space-y-2">
-                                            <x-form.label for="description" :value="__('Description')" />
+                                            <x-form.label  for="description" :value="__('Description')" />
 
                                             <x-form.input-with-icon-wrapper>
                                                 <x-slot name="icon">
-                                                    {{-- <x-tabler-id-badge-2 class="w-5 h-5" /> --}}
+                                                    {{--
+                                                    <x-tabler-id-badge-2 class="w-5 h-5" /> --}}
                                                 </x-slot>
 
                                                 <textarea
                                                     class="block w-full py-2 border-gray-400 rounded-md focus:border-gray-400 focus:ring focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1"
-                                                    placeholder="{{ __('Description') }}" name="description" id="description" rows="1"></textarea>
+                                                    placeholder="{{ __('Description') }}" name="description"
+                                                    id="description" rows="1"></textarea>
 
                                             </x-form.input-with-icon-wrapper>
                                         </div>
@@ -126,7 +129,7 @@
                                         <div class="inline-flex items-center gap-3">
                                             <!-- start time-->
                                             <div class="space-y-2">
-                                                <x-form.label for="start_time" :value="__('Start Time')" />
+                                                <x-form.label class="mt-3" for="start_time" :value="__('Start Time')" />
 
                                                 <x-form.input-with-icon-wrapper>
                                                     <x-slot name="icon">
@@ -134,13 +137,13 @@
                                                     </x-slot>
 
                                                     <x-form.input withicon id="start_time" class="block w-full"
-                                                        type="text" name="start_time" :value="old('start_time')" required
-                                                        autofocus placeholder="{{ __('Start Time') }}" />
+                                                        type="text" name="start_time" :value="old('start_time')"
+                                                        required autofocus placeholder="{{ __('Start Time') }}" />
                                                 </x-form.input-with-icon-wrapper>
                                             </div>
                                             <!-- End time-->
                                             <div class="space-y-2">
-                                                <x-form.label for="end_time" :value="__('End Time')" />
+                                                <x-form.label class="mt-3" for="end_time" :value="__('End Time')" />
 
                                                 <x-form.input-with-icon-wrapper>
                                                     <x-slot name="icon">
@@ -156,15 +159,15 @@
 
                                         <!-- Duration -->
                                         <div class="space-y-2">
-                                            <x-form.label for="duration" :value="__('Duration')" />
+                                            <x-form.label  class="mt-3" for="duration" :value="__('Duration')" />
 
                                             <x-form.input-with-icon-wrapper>
                                                 <x-slot name="icon">
                                                     <x-gmdi-access-time class="w-5 h-5" />
                                                 </x-slot>
 
-                                                <x-form.input withicon id="duration" class="block w-full"
-                                                    type="text" name="duration" :value="old('duration')" required autofocus
+                                                <x-form.input withicon id="duration" class="block w-full" type="text"
+                                                    name="duration" :value="old('duration')" required autofocus
                                                     placeholder="{{ __('Duration in Min') }}" />
                                             </x-form.input-with-icon-wrapper>
                                         </div>
