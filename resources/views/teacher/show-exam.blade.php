@@ -137,7 +137,7 @@
                                 <h1 class="text-base tracking-wide"> <i class="fa fa-calendar" aria-hidden="true"></i>
                                     Starts: {{ $exam->start_time }}</h1>
                                 <h1 class="text-base tracking-wide"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    Ends: {{ $exam->start_time }}</h1>
+                                    Ends: {{ $exam->end_time }}</h1>
                             </div>
 
                             <div class="mx-10 my-3">

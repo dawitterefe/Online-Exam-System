@@ -91,7 +91,6 @@
                         </div>
                     </div>
                 </a>
-
             </div>
             {{-- ongoing exams--}}
             <div
