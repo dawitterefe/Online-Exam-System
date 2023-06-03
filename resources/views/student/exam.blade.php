@@ -50,7 +50,7 @@
     </x-slot>
 
     <!-- component -->
-    <div class="max-w-4xl mt-3 mx-auto">
+    <div class="max-w-4xl mt-3 mb-10 mx-auto">
         <div class="flex flex-col">
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle bg-white shadow sm:rounded-lg dark:bg-gray-800">
@@ -145,12 +145,7 @@
                             </div>
                         </form>
                     </div>
-
-                    <div class="px-4 py-2 bg-gray-300 dark:bg-gray-700 ">
-                        {{-- {{ $questions->links() }} --}}
-                    </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -159,7 +154,6 @@
 
 
     <script>
-
         var duration = {{$duration}} * 60;
         var time = duration;
         var deadline = document.getElementById('deadline');
@@ -199,7 +193,6 @@
             window.location = "/logout";
         }
         });
-
 
 
     </script>

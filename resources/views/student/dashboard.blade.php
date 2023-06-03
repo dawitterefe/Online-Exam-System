@@ -109,7 +109,6 @@
                                     ->whereHas('results', function ($query) {
                                     return $query->where('student_id', auth()->user()->student->id);
                                     })
-                                    ->where('is_active', false)
                                     ->count()}}
                                 </div>
                                 <div class="mt-1 text-base text-gray-600 dark:text-gray-500">Completed Exams
@@ -295,7 +294,6 @@
                         ->whereHas('results', function ($query) {
                         return $query->where('student_id', auth()->user()->student->id);
                         })
-                        ->where('is_active', false)
                         ->get() as $exam)
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td

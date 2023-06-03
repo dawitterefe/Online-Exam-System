@@ -53,9 +53,21 @@
 
         <div class="flex flex-col">
             <div class="overflow-x-auto shadow-md sm:rounded-lg">
+                @if ($results->isEmpty())
+                <div class="flex justify-center my-3">
+                    <div class="flex items-center gap-3">
+                        <div>
+                            <x-fluentui-emoji-sad-slight-24 class="h-7 w-7 text-yellow-500" />
+                        </div>
+
+                        <div>
+                            <h2 class="font-semibold">You have not submitted or finished any exams yet.</h2>
+                        </div>
+                    </div>
+                </div>
+                @else
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-hidden ">
-
                         <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                             <thead class="bg-gray-300 dark:bg-gray-700">
                                 <tr>
@@ -94,6 +106,7 @@
 
                                 </tr>
                             </thead>
+
 
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
@@ -146,7 +159,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
 
                     <div class="px-4 py-2 bg-gray-300 dark:bg-gray-700 ">
@@ -155,6 +167,7 @@
 
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
