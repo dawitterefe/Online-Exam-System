@@ -51,7 +51,8 @@ class UserController extends Controller
             'father_name' => $request->last_name,
             'gender' => $request->input('gender'),
             'email' => $request->email,
-            'password' => bcrypt($request->email . '#' . $request->last_name),
+            'password' => bcrypt('password'),
+            // 'password' => bcrypt($request->email . '#' . $request->last_name),
             'role_id' => $request->roles,
         ]);
 
@@ -152,7 +153,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->gender = $request->input('gender');
 
-        if ($user->role->id != 3 ) {
+        if ($user->role->id != 3) {
 
             $oldRole = $user->role;
             $newRole = Role::find($request->input('role'));
@@ -198,10 +199,6 @@ class UserController extends Controller
                 }
             }
         }
-
-
-
-
 
         $user->save();
 

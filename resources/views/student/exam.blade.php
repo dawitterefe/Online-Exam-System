@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="header">
-
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div class="inline-flex items-center gap-2">
                 <div>
@@ -14,37 +13,6 @@
             <a href="{{ URL::previous() }}"
                 class="middle none center rounded-lg bg-cyan-500 py-2 px-3 font-sans text-xs font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
-        </div>
-        {{-- Notifications --}}
-        <div class="mt-3 mb-1">
-            @if (session('status') === 'activated')
-            <div class="flex items-center gap-2">
-                <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
-                    <x-gmdi-notifications-active-o class="w-5 h-5 text-green-600 dark:text-green-400" />
-                </div>
-                <div>
-                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
-                        class="text-sm font-bold text-green-600 dark:text-green-400">
-                        {{ __('The Exam is now online') }}
-                    </p>
-                </div>
-            </div>
-            @endif
-        </div>
-        <div class="mt-3 mb-1">
-            @if (session('status') === 'deactivated')
-            <div class="flex items-center gap-2">
-                <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)">
-                    <x-gmdi-notifications-active-o class="w-5 h-5 text-red-600 dark:text-red-400" />
-                </div>
-                <div>
-                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
-                        class="text-sm font-bold text-red-600 dark:text-red-400">
-                        {{ __('The Exam is now offline') }}
-                    </p>
-                </div>
-            </div>
-            @endif
         </div>
 
     </x-slot>

@@ -107,17 +107,6 @@
 
                                     {{-- Group Two --}}
                                     <div>
-                                        {{-- change name input --}}
-                                        <div class="space-y-2  mb-2">
-                                            <x-form.label for="exam_name" :value="__('Exam Name')" />
-
-                                            <x-form.input id="exam_name" name="exam_name" type="text"
-                                                class="block w-full" :value="old('exam_name', $exam->name)"  autofocus
-                                                autocomplete="exam_name" />
-
-                                            <x-form.error :messages="$errors->get('exam_name')" />
-                                        </div>
-
                                         {{-- Start and end DateTime --}}
                                         <div class="inline-flex items-center gap-3 ">
                                             <!-- Start Time-->

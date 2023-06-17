@@ -135,19 +135,13 @@
 
 
                         <div>
-                            <x-button class="justify-center w-full gap-2">
+                            <x-button class="justify-center w-full gap-2 mb-5">
                                 <x-heroicon-o-user-add class="w-6 h-6" aria-hidden="true" />
 
                                 <span>{{ __('Register') }}</span>
                             </x-button>
                         </div>
 
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
-                            {{ __('Already registered?') }}
-                            <a href="{{ route('login') }}" class="text-blue-500 hover:underline">
-                                {{ __('Login') }}
-                            </a>
-                        </p>
                     </div>
         </form>
     </x-auth-card>

@@ -90,9 +90,11 @@
                                 @endif
 
                                 @else
+                                @if (\App\Models\User::count() > 0)
                                 <a href="{{ route('login') }}"
                                     class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Log
                                     in</a>
+                                @endif
                                 @if (Route::has('register') && \App\Models\User::count() == 0)
                                 <a href="{{ route('register') }}"
                                     class="ml-4 font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">Register</a>
@@ -139,9 +141,16 @@
 
                                 @else
                                 <div class="flex items-cneter gap-3">
+                                    @if (\App\Models\User::count() > 0)
                                     <div><a href="{{ route('login') }}"
                                             class="middle none center rounded-lg ml-2 bg-cyan-500 py-2 px-6 font-sans text-lg font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                             </i>Log in</a></div>
+                                    @endif
+                                    @if (Route::has('register') && \App\Models\User::count() == 0)
+                                    <div><a href="{{ route('register') }}"
+                                            class="middle none center rounded-lg ml-2 bg-cyan-500 py-2 px-6 font-sans text-lg font-bold  text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg-underline hover:shadow-cyan-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                            </i>Register</a></div>
+                                    @endif
                                     <div><a href="#footer"
                                             class="font-semibold text-gray-600 rounded-md py-1 px-1 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none focus:ring focus:ring-cyan-500  focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
                                             About Us</a></div>
@@ -318,7 +327,7 @@
                                     </a>
 
                                 </div>
-                                <p class="text-body-color text-sm">&copy; 2023 Debre Berhan <br>  University </p>
+                                <p class="text-body-color text-sm">&copy; 2023 Debre Berhan <br> University </p>
 
 
                             </div>
