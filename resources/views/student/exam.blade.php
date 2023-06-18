@@ -155,12 +155,12 @@
 
         },1000);
 
-        document.addEventListener("visibilitychange", function() {
-        if (document.hidden) {
-            // Page is hidden, log out the user
-            window.location = "/logout";
-        }
-        });
+        // document.addEventListener("visibilitychange", function() {
+        // if (document.hidden) {
+        //     // Page is hidden, log out the user
+        //     window.location = "/logout";
+        // }
+        // });
 
 
     </script>
